@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product\Price;
 use App\Models\Product\Product;
 use App\Models\Stock\Stock;
 use Illuminate\Http\Request;
@@ -77,12 +78,18 @@ class ProductController extends Controller
             }
         } 
 
+        /**
+         *    Price
+         **/
         $price = new Price();
         $price->product_id = $product->id;
         $price->zwl = $request->zwl;
         $price->usd = $request->usd;
         $price->save();
 
+        /**
+         *    Stock
+         **/
         $stock = new Stock();
         $stock->product_id = $product->id;
         $stock->quantity = $request->quantity;
