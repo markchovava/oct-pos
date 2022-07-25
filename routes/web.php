@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\POS\POSController;
+use App\Http\Controllers\Product\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/pos', [POSController::class, 'index'])->name('admin.pos');
+Route::get('/admin/customer', [CustomerController::class, 'index'])->name('admin.customer');
+Route::get('/admin/product/add', [ProductController::class, 'add'])->name('admin.product.add');
+Route::post('/admin/product/store', [ProductController::class, 'store'])->name('admin.product.store');
 
 Route::get('/', function () {
     return view('welcome');

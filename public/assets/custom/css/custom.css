@@ -1,0 +1,27 @@
+.icon__danger{
+    color:rgb(255,96,96);
+    text-decoration: none;
+}
+.icon__danger:hover{
+    color:rgb(255, 36, 36);
+}
+
+.icon__success{
+    color: #35f8be;
+    text-decoration: none;
+}
+
+
+.icon__success:hover{
+    color: #00fa92;
+    text-decoration: none;
+}
+
+.icon__info{
+    color: #41c3ff;
+    text-decoration: none;
+}
+.icon__info:hover{
+    color: #00aeff;
+    text-decoration: none;
+}
