@@ -12,4 +12,9 @@ class Category extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class, 'product_categories', 'categories_id', 'product_id')
+            ->withTimestamps();
+    }
 }

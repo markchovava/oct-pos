@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
+            $table->integer('product_id')->nullable();
+            $table->integer('zwl')->nullable();
+            $table->integer('usd')->nullable();
             $table->timestamps();
         });
     }

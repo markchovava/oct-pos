@@ -12,7 +12,7 @@
 						</a>
 					</div>
 					<div class="menu-item">
-						<a href="#" class="menu-link">
+						<a href="{{ route('admin.pos') }}" class="menu-link">
 							<span class="menu-icon">
 								<i class="bi bi-bag-check"></i>
 							</span>
@@ -29,13 +29,13 @@
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="{{ route('admin.product.add') }}" class="menu-link">
-									<span class="menu-text">Add Product</span>
+								<a href="{{ route('admin.product.index') }}" class="menu-link">
+									<span class="menu-text">Products List</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
+								<a href="{{ route('admin.product.add') }}" class="menu-link">
+									<span class="menu-text">Add Product</span>
 								</a>
 							</div>
 							<div class="menu-item">

@@ -7,6 +7,10 @@ $route = url()->current();
 <script src="{{ asset('assets/hud/assets/js/app.min.js') }}"></script>
 <!-- ================== END core-js ================== -->
 
+
+<script src="{{ asset('assets/custom/js/product.custom.js') }}"></script>
+<script src="{{ asset('assets/custom/js/pos.custom.js') }}"></script>
+
 @if( $route == route('admin.dashboard'))
 <!-- ================== BEGIN page-js ================== -->
 <script src="{{ asset('assets/hud/assets/plugins/jvectormap-next/jquery-jvectormap.min.js') }}"></script>

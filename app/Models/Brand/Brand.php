@@ -12,4 +12,9 @@ class Brand extends Model
     protected $fillable = [
         'name', 'image'
     ];
+
+    public function products(){
+        return $this->belongsToMany(Product::class, 'product_brands', 'brand_id', 'product_id')
+            ->withTimestamps();
+    }
 }

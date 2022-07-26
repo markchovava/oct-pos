@@ -24,9 +24,9 @@
 	<div class="brand">
 		<a href="index.html" class="brand-logo">
 			<span class="brand-img">
-				<span class="brand-img-text text-theme">H</span>
+				<span class="brand-img-text text-theme">O</span>
 			</span>
-			<span class="brand-text">HUD ADMIN</span>
+			<span class="brand-text">OCT POS</span>
 		</a>
 	</div>
 	<!-- END brand -->
@@ -178,7 +178,7 @@
 				<a class="dropdown-item d-flex align-items-center" href="calendar.html">CALENDAR <i class="bi bi-calendar ms-auto text-theme fs-16px my-n1"></i></a>
 				<a class="dropdown-item d-flex align-items-center" href="settings.html">SETTINGS <i class="bi bi-gear ms-auto text-theme fs-16px my-n1"></i></a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item d-flex align-items-center" href="page_login.html">LOGOUT <i class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
+				<a class="dropdown-item d-flex align-items-center" href="{{ route('admin.login') }}">LOGOUT <i class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
 			</div>
 		</div>
 	</div>

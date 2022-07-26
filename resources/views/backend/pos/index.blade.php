@@ -22,8 +22,8 @@
                         <!-- BEGIN logo -->
                         <div class="logo">
                             <a href="index.html">
-                                <div class="logo-img"><i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i></div>
-                                <div class="logo-text">Pine & Dine</div>
+                               
+                                <div class="logo-text"><span class="h1">OCT</span>POS</div>
                             </a>
                         </div>
                         <!-- END logo -->
@@ -32,10 +32,11 @@
                             <div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#" data-filter="all">
+                                        <a class="nav-link active" href="{{ route('admin.pos') }}">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-utensils"></i> All Dishes
+													<i class="fa fa-fw fa-shopping-cart" aria-hidden="true"></i>
+													Point Of Sale
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -47,10 +48,10 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" data-filter="meat">
+                                        <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-drumstick-bite"></i> Meat
+													<i class="fa fa-fw fa-tachometer" aria-hidden="true"></i> Dashboard
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -62,10 +63,10 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" data-filter="burger">
+                                        <a class="nav-link" href="{{ route('admin.product.index') }}">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-hamburger"></i> Burger
+                                                    <i class="fa fa-fw fa-tag"></i> Products
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -80,7 +81,7 @@
                                         <a class="nav-link" href="#" data-filter="pizza">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-pizza-slice"></i> Pizza
+													<i class="fa fa-fw fa-balance-scale" aria-hidden="true"></i> Stock
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -95,7 +96,7 @@
                                         <a class="nav-link" href="#" data-filter="drinks">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-cocktail"></i> Drinks
+													<i class="fa fa-fw fa-handshake" aria-hidden="true"></i>Sales
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -110,7 +111,7 @@
                                         <a class="nav-link" href="#" data-filter="desserts">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-ice-cream"></i> Desserts
+													<i class="fa fa-users" aria-hidden="true"></i>Customers
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -125,7 +126,7 @@
                                         <a class="nav-link" href="#" data-filter="snacks">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <i class="fa fa-fw fa-cookie-bite"></i> Snacks
+													<i class="fa fa-fw fa-filter" aria-hidden="true"></i> Operations
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>
@@ -156,257 +157,40 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%;"scope="col">#</th>
-                                                    <th style="width: 21%;" scope="col">Name</th>
-                                                    <th style="width: 18%;" scope="col">Barcode</th>
+                                                    <th style="width: 20%;" scope="col">Name</th>
+                                                    <th style="width: 20%;" scope="col">Barcode</th>
                                                     <th style="width: 18%;" scope="col">Price</th>
                                                     <th style="width: 18%;" scope="col">Quantity</th>
                                                     <th style="width: 18%;" scope="col">Total</th>
                                                 </tr>
                                             </thead>
-												<tbody>
-													<tr>
+												<tbody class="product__insertArea">
+													<tr class="product__row display__none">
 														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
+															<span class="remove__btn">
+                                                            	<i class="fas fa-lg fa-fw me-2 fa-times icon__danger"></i>
+															</span>
                                                         </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td>
-															<input type="number" name="" style="width:80% ;" class="form-control form-control-sm">
+														<td class="product__nameArea">
+															<span class="name__text"></span>
+															<input type="hidden" class="name__value">
 														</td>
-														<td>$1.45</td>
+														<td class="product__barcodeArea">
+															<span class="barcode__text"></span>
+															<input type="hidden" class="barcode__value">
+														</td>
+														<td class="product__priceArea">
+															<span class="price__text"></span>
+															<input type="hidden" class="usd__value">
+															<input type="hidden" class="zwl__value">
+														</td>
+														<td>
+															<input style="width:80%;" min="1"
+															class="form-control form-control-sm product__priceArea">
+														</td>
+														<td class="product__totalArea"></td>
 													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-													<tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                    <tr>
-														<th scope="row">
-                                                            <i class="fas fa-lg fa-fw me-2 fa-times"></i>
-                                                        </th>
-														<td>Mark.</td>
-														<td>123454321</td>
-														<td>$1.45</td>
-														<td><input type="number" name="" style="width:80% ;" class="form-control form-control-sm"></td>
-														<td>$1.45</td>
-													</tr>
-                                                </tbody>
+												</tbody>
 											</table>
                                         </div>
                                         <div class="card-arrow">
@@ -458,15 +242,18 @@
 								<!-- BEGIN #newOrderTab -->
 								<div class="tab-pane fade h-100 show active" id="newOrderTab">
 									<!-- BEGIN pos-order -->
-									<div class="pos-order">
+									<div class="pos-order product__search">
                                         <div class="input-group flex-nowrap">
-                                            <input type="text" class="form-control" name="product_name" placeholder="Product Name">
-                                            <span class="input-group-text btn">
+                                            <input type="text" name="product_name" class="form-control product__name" 
+												placeholder="Product Name">
+                                            <span id="search__btn" href="{{ route('admin.pos.searchbyname') }}" class="input-group-text btn search__btn">
                                                 <i class="fas fa-lg fa-fw me-2 fa-search"></i>
                                             </span>
                                         </div>
 									</div>
 									<!-- END pos-order -->
+									<ul class="product__results display__none">
+									</ul>
 								</div>
 								<!-- END #orderHistoryTab -->
 							

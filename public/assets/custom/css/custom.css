@@ -1,3 +1,15 @@
+/**
+*   By Mark Chovava
+*   26/07/2022
+*/
+
+.display__none{
+    display: none;
+}
+
+/**
+*   Icon Coloring
+**/
 .icon__danger{
     color:rgb(255,96,96);
     text-decoration: none;
@@ -24,4 +36,36 @@
 .icon__info:hover{
     color: #00aeff;
     text-decoration: none;
+}
+
+
+.product__search + .product__results{
+    position:absolute;
+    z-index:4;
+    list-style: none; 
+    transition: all .3s ease;
+    cursor: pointer;
+    padding-bottom: 1rem;
+    width:100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.product__search + .product__results li{
+     padding-top:0.4rem;
+     
+}
+.product__search + .product__results li:hover{
+    text-decoration: underline;
+}
+
+.product__search .input-group input:focus + .product__search .product__results{
+    display: block;
+}
+
+.product__results li { 
+    display: block;  
+}
+
+.pos .pos-sidebar .pos-order {
+    padding-bottom: 0.5rem !important;
 }
