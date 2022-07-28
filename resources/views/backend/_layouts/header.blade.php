@@ -168,9 +168,9 @@
 		<div class="menu-item dropdown dropdown-mobile-full">
 			<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
 				<div class="menu-img online">
-					<img src="assets/img/user/profile.jpg" alt="Profile" height="60" />
+					<!-- <img src="" alt="Profile" height="60" /> -->
 				</div>
-				<div class="menu-text d-sm-block d-none">username@account.com</div>
+				<div class="menu-text d-sm-block d-none">{{ auth()->user()->name }}</div>
 			</a>
 			<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
 				<a class="dropdown-item d-flex align-items-center" href="profile.html">PROFILE <i class="bi bi-person-circle ms-auto text-theme fs-16px my-n1"></i></a>

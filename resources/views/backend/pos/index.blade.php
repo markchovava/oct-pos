@@ -12,6 +12,7 @@
     </div>
 	<!-- BEGIN #app -->
 	<form method="post" action="{{ route('admin.pos.process') }}" id="app" class="app app-content-full-height app-without-sidebar app-without-header">
+		@csrf
 		<!-- BEGIN #content -->
 		<div id="content" class="app-content p-1 ps-xl-4 pe-xl-4 pt-xl-3 pb-xl-3">
 			<!-- BEGIN pos -->
@@ -317,10 +318,10 @@
 											<i class="bi bi-receipt fa-fw fa-lg"></i><br />
 											<span class="small">Bill</span>
 										</a>
-										<a href="#" class="btn btn-outline-theme rounded-0 w-150px">
+										<button type="submit" class="btn btn-outline-theme rounded-0 w-150px">
 											<i class="bi bi-send-check fa-lg"></i><br />
 											<span class="small">Submit Order</span>
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>

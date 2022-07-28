@@ -25,9 +25,7 @@ class POSController extends Controller
 
     public function process(Request $request){
         DB::transaction(function() use($request){
-            rand(0, 100);
             $transaction_id = date('YmdHi') . rand(0, 100);
-            dd($transaction_id);
            /*  */
             $user_id = Auth::id();
             $operation = Operation::where('user_id', $user_id)->first();
