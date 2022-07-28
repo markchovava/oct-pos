@@ -24,6 +24,7 @@ Route::get('/admin/register', [AdminAuthController::class, 'register'])->name('a
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 /* Point of Sale */
 Route::get('/admin/pos', [POSController::class, 'index'])->name('admin.pos');
+Route::post('/admin/pos', [POSController::class, 'process'])->name('admin.pos.process');
 Route::get('/admin/pos/searchbyname', [POSController::class, 'searchbyname'])->name('admin.pos.searchbyname');
 Route::get('/admin/customer', [CustomerController::class, 'index'])->name('admin.customer');
 

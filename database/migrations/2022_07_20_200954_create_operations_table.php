@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->id();
-            $table->integer('employee_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('start_time')->nullable();
             $table->string('end_time')->nullable();
             $table->integer('usd_total')->nullable();

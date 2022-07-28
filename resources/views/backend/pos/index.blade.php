@@ -11,7 +11,7 @@
         @include('backend._layouts.header')
     </div>
 	<!-- BEGIN #app -->
-	<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
+	<form method="post" action="{{ route('admin.pos.process') }}" id="app" class="app app-content-full-height app-without-sidebar app-without-header">
 		<!-- BEGIN #content -->
 		<div id="content" class="app-content p-1 ps-xl-4 pe-xl-4 pt-xl-3 pb-xl-3">
 			<!-- BEGIN pos -->
@@ -149,46 +149,51 @@
                         <div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
 							
                             <div class="row gx-4">
-                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 pb-4" data-type="meat">
+                                <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 pb-4">
                                     <!-- BEGIN card -->
                                     <div class="card h-100">
                                         <div class="card-body h-100 p-1">
-                                        <table class="table table-hover mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 5%;"scope="col">#</th>
-                                                    <th style="width: 20%;" scope="col">Name</th>
-                                                    <th style="width: 20%;" scope="col">Barcode</th>
-                                                    <th style="width: 18%;" scope="col">Price</th>
-                                                    <th style="width: 18%;" scope="col">Quantity</th>
-                                                    <th style="width: 18%;" scope="col">Total</th>
-                                                </tr>
-                                            </thead>
+											<table class="table table-hover mb-0">
+												<thead>
+													<tr>
+														<th style="width: 5%;"scope="col">#</th>
+														<th style="width: 20%;" scope="col">Name</th>
+														<th style="width: 20%;" scope="col">Barcode</th>
+														<th style="width: 18%;" scope="col">Price</th>
+														<th style="width: 18%;" scope="col">Quantity</th>
+														<th style="width: 18%;" scope="col">Total</th>
+													</tr>
+												</thead>
 												<tbody class="product__insertArea">
 													<tr class="product__row display__none">
 														<th scope="row">
 															<span class="remove__btn">
-                                                            	<i class="fas fa-lg fa-fw me-2 fa-times icon__danger"></i>
+																<i class="fas fa-lg fa-fw me-2 fa-times icon__danger"></i>
 															</span>
-                                                        </th>
+														</th>
 														<td class="product__nameArea">
 															<span class="name__text"></span>
 															<input type="hidden" class="name__value">
+															<input type="hidden" class="product__idValue">
 														</td>
 														<td class="product__barcodeArea">
 															<span class="barcode__text"></span>
 															<input type="hidden" class="barcode__value">
 														</td>
 														<td class="product__priceArea">
-															<span class="price__text"></span>
+															$<span class="price__text"></span>
+															<input type="hidden" class="price__value">
 															<input type="hidden" class="usd__value">
 															<input type="hidden" class="zwl__value">
 														</td>
 														<td>
-															<input style="width:80%;" min="1"
-															class="form-control form-control-sm product__priceArea">
+															<input style="width:80%;" min="0" value="0"
+															class="form-control form-control-sm quantity__value">
 														</td>
-														<td class="product__totalArea"></td>
+														<td class="product__totalArea">
+															$<span class="product__totalText"></span>
+															<input type="hidden" class="product__totalValue">
+														</td>
 													</tr>
 												</tbody>
 											</table>
@@ -218,9 +223,15 @@
 										<i class="bi bi-chevron-left"></i>
 									</button>
 								</div>
-								<div class="icon"><img src="../assets/img/pos/icon-table.svg" alt="" /></div>
-								<div class="title">Search Product</div>
-								<div class="order">Receipt No: <b>#0056</b></div>
+								<div class="title">Choose Currency</div>
+								<div class="order currency">
+									<label for="usd__currency" class="usd__currency">
+										<input type="radio" name="currency" value="USD" id="usd__currency"> USD &nbsp;
+									</label>
+									<label for="zwl__currency" class="zwl__currency">
+										<input type="radio" name="currency" value="ZWL" id="zwl__currency"> ZWL
+									</label>
+								</div>
 							</div>
 							<!-- END pos-sidebar-header -->
 						
@@ -228,10 +239,10 @@
 							<div class="pos-sidebar-nav">
 								<ul class="nav nav-tabs nav-fill">
 									<li class="nav-item">
-										<a class="nav-link active" href="#" data-bs-toggle="tab" data-bs-target="#newOrderTab">By Name</a>
+										<a class="nav-link active" href="#" data-bs-toggle="tab" data-bs-target="#newOrderTab">Name Search</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#orderHistoryTab">By Barcode</a>
+										<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#orderHistoryTab">Barcode</a>
 									</li>
 								</ul>
 							</div>
@@ -244,7 +255,7 @@
 									<!-- BEGIN pos-order -->
 									<div class="pos-order product__search">
                                         <div class="input-group flex-nowrap">
-                                            <input type="text" name="product_name" class="form-control product__name" 
+                                            <input type="text" class="form-control product__name" 
 												placeholder="Product Name">
                                             <span id="search__btn" href="{{ route('admin.pos.searchbyname') }}" class="input-group-text btn search__btn">
                                                 <i class="fas fa-lg fa-fw me-2 fa-search"></i>
@@ -275,23 +286,26 @@
 							<div class="pos-sidebar-footer">
 								<div class="d-flex align-items-center mb-2">
 									<div>Subtotal</div>
-									<div class="flex-1 text-end h6 mb-0">$30.98</div>
+									<div class="flex-1 text-end h6 mb-0">
+										$<span class="subtotal__text"></span>
+										<input type="hidden" name="subtotal_value" class="subtotal__value">
+										
+									</div>
 								</div>
 								<div class="d-flex align-items-center mb-2">
-									<div>Taxes (6%)</div>
-									<div class="flex-1 text-end h6 mb-0">$2.12</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<div>
-										Shipping
-										<input type="checkbox" name="include_shipping" value="1" class="form-check-input">
+									<div>Taxes (15%)</div>
+									<div class="flex-1 text-end h6 mb-0">
+										<span class="tax__text"></span>
+										<input type="hidden" name="tax" class="tax__value">
 									</div>
-									<div class="flex-1 text-end h6 mb-0">$2.12</div>
 								</div>
 								<hr />
 								<div class="d-flex align-items-center mb-2">
 									<div>Total</div>
-									<div class="flex-1 text-end h4 mb-0">$33.10</div>
+									<div class="flex-1 text-end h4 mb-0">
+										$<span class="grandtotal__text"></span>
+										<input type="hidden" name="grandtotal" class="grandtotal__value">
+									</div>
 								</div>
 								<div class="mt-3">
 									<div class="btn-group d-flex">
@@ -336,7 +350,7 @@
 		<!-- BEGIN btn-scroll-top -->
 		<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
 		<!-- END btn-scroll-top -->
-	</div>
+	</form>
 	<!-- END #app -->
 	
 	<!-- BEGIN #modalPosItem -->

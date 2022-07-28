@@ -158,7 +158,7 @@ class ProductController extends Controller
             /**
              *    Price
              **/
-            $price = Price::where('product_id', $id);
+            $price = Price::where('product_id', $id)->first();
             $price->product_id = $product->id;
             $price->zwl = $request->zwl;
             $price->usd = $request->usd;
@@ -166,7 +166,7 @@ class ProductController extends Controller
             /**
              *    Stock
              **/
-            $stock = Stock::where('product_id', $id);
+            $stock = Stock::where('product_id', $id)->first();
             $stock->product_id = $product->id;
             $stock->quantity = $request->quantity;
             $stock->save();
