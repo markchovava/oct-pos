@@ -7,6 +7,20 @@
     display: none;
 }
 
+.img__aspect5by4{
+    width:100%; 
+    aspect-ratio:5/4; 
+    border:1px solid rgba(255, 255, 255, 0.3);
+}
+
+/**
+*   Image Icons
+**/
+.img__icon-40{
+    width:40px;
+    aspect-ratio: 5/4;
+}
+
 /**
 *   Icon Coloring
 **/
@@ -69,3 +83,4 @@
 .pos .pos-sidebar .pos-order {
     padding-bottom: 0.5rem !important;
 }
+

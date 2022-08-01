@@ -16,7 +16,7 @@
 					<!-- BEGIN title -->
 					<div class="d-flex fw-bold small mb-3">
 						<span class="flex-grow-1">POINT OF SALE</span>
-						<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+						<a href="{{ route('admin.pos') }}" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
 					</div>
 					<!-- END title -->
 					<!-- BEGIN stat-lg -->
@@ -187,7 +187,7 @@
 					<!-- BEGIN title -->
 					<div class="d-flex fw-bold small mb-3">
 						<span class="flex-grow-1">ORDERS</span>
-						<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+						<a href="{{ route('admin.order.index') }}" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
 					</div>
 					<!-- END title -->
 					<!-- BEGIN stat-lg -->

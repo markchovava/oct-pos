@@ -38,7 +38,7 @@
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Gender <span class="text-danger">*</span></label>
-						<select class="form-select form-select-lg bg-white bg-opacity-5" required="required">
+						<select name="gender" class="form-select form-select-lg bg-white bg-opacity-5" required="required">
 							<option value="Female">Female</option>
 							<option value="Male">Male</option>
 						</select>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation\Operation;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AdminAuthController extends Controller
 {
@@ -41,5 +44,18 @@ class AdminAuthController extends Controller
             return redirect()->back();
         }
     
+    }
+
+    public function logout(){
+        $user_id = Auth::id();
+        /* Insert End Time of a session */
+        $operation = Operation::where('user_id', $user_id)->first();
+        $operation->status = 0;
+        $operation->end_time = now();
+        $operation->save();
+
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

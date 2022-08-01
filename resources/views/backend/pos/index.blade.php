@@ -240,10 +240,10 @@
 							<div class="pos-sidebar-nav">
 								<ul class="nav nav-tabs nav-fill">
 									<li class="nav-item">
-										<a class="nav-link active" href="#" data-bs-toggle="tab" data-bs-target="#newOrderTab">Name Search</a>
+										<a class="nav-link active" href="#" data-bs-toggle="tab" data-bs-target="#orderHistoryTab">Barcode</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#orderHistoryTab">Barcode</a>
+										<a class="nav-link" href="#" data-bs-toggle="tab" data-bs-target="#newOrderTab">Name Search</a>
 									</li>
 								</ul>
 							</div>
@@ -251,8 +251,26 @@
 						
 							<!-- BEGIN pos-sidebar-body -->
 							<div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
+								<!-- BEGIN #orderHistoryTab -->
+								<div class="tab-pane fade h-100 show active" id="orderHistoryTab">
+									<!-- BEGIN pos-order -->
+									<div class="pos-order barcode__searchArea">
+										<div class="input-group flex-nowrap">
+                                            <input type="text" class="form-control" name="barcode" id="barcode__insert" autofocus
+																							placeholder="Product Barcode">
+                                            <span id="barcode__search" href="{{ route('admin.pos.searchbybarcode') }}" 
+																		class="input-group-text btn barcode__search">
+                                                <i class="fas fa-lg fa-fw me-2 fa-check"></i>
+                                            </span>
+                                        </div>
+									</div>
+									<!-- END pos-order -->
+									<ul class="product__results display__none">
+									</ul>
+								</div>
+								<!-- END #orderHistoryTab -->
 								<!-- BEGIN #newOrderTab -->
-								<div class="tab-pane fade h-100 show active" id="newOrderTab">
+								<div class="tab-pane fade h-100 " id="newOrderTab">
 									<!-- BEGIN pos-order -->
 									<div class="pos-order product__search">
                                         <div class="input-group flex-nowrap">
@@ -268,18 +286,6 @@
 									</ul>
 								</div>
 								<!-- END #orderHistoryTab -->
-							
-								<!-- BEGIN #orderHistoryTab -->
-								<div class="tab-pane fade h-100" id="orderHistoryTab">
-									<!-- BEGIN pos-order -->
-									<div class="pos-order">
-                                        <div class="input-group flex-nowrap">
-                                            <input type="text" class="form-control" name="barcode" placeholder="Barcode">
-                                        </div>
-									</div>
-									<!-- END pos-order -->
-								</div>
-								<!-- END #orderHistoryTab -->
 							</div>
 							<!-- END pos-sidebar-body -->
 						
@@ -289,7 +295,7 @@
 									<div>Subtotal</div>
 									<div class="flex-1 text-end h6 mb-0">
 										$<span class="subtotal__text"></span>
-										<input type="hidden" name="subtotal_value" class="subtotal__value">
+										<input type="hidden" name="subtotal" class="subtotal__value">
 										
 									</div>
 								</div>
@@ -310,9 +316,9 @@
 								</div>
 								<div class="mt-3">
 									<div class="btn-group d-flex">
-										<a href="#" class="btn btn-outline-default rounded-0 w-80px">
+										<a href="javascript:;" class="reset__amount btn btn-outline-default rounded-0 w-80px">
 											<i class="bi bi-bell fa-lg"></i><br />
-											<span class="small">Service</span>
+											<span class="small">Reset</span>
 										</a>
 										<a href="#" class="btn btn-outline-default rounded-0 w-80px">
 											<i class="bi bi-receipt fa-fw fa-lg"></i><br />

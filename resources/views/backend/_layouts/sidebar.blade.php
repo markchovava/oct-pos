@@ -30,19 +30,20 @@
 						<div class="menu-submenu">
 							<div class="menu-item">
 								<a href="{{ route('admin.product.index') }}" class="menu-link">
-									<span class="menu-text">Products List</span>
+									<span class="menu-text">Products</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="{{ route('admin.product.add') }}" class="menu-link">
-									<span class="menu-text">Add Product</span>
+								<a href="{{ route('admin.category.index') }}" class="menu-link">
+									<span class="menu-text">Categories</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="{{ route('admin.brand.index') }}" class="menu-link">
+									<span class="menu-text">Brand</span>
 								</a>
 							</div>
+							
 						</div>
 					</div>
 					<div class="menu-item has-sub">
@@ -187,6 +188,32 @@
 							<div class="menu-item">
 								<a href="email_inbox.html" class="menu-link">
 									<span class="menu-text">Inbox</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_compose.html" class="menu-link">
+									<span class="menu-text">Compose</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="email_detail.html" class="menu-link">
+									<span class="menu-text">Detail</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="bi bi-gear"></i>
+							</span>
+							<span class="menu-text">Settings</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="{{ route('admin.role.index') }}" class="menu-link">
+									<span class="menu-text">Roles</span>
 								</a>
 							</div>
 							<div class="menu-item">

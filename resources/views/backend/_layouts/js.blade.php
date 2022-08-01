@@ -7,7 +7,6 @@ $route = url()->current();
 <script src="{{ asset('assets/hud/assets/js/app.min.js') }}"></script>
 <!-- ================== END core-js ================== -->
 
-
 <script src="{{ asset('assets/custom/js/product.custom.js') }}"></script>
 <script src="{{ asset('assets/custom/js/pos.custom.js') }}"></script>
 
@@ -25,6 +24,17 @@ $route = url()->current();
 <script src="{{ asset('assets/hud/assets/js/demo/pos-customer-order.demo.js') }}"></script>
 <!-- ================== END page-js ================== -->
 @endif
+
+
+<script>
+//Display Brand image on upload in add and edit page
+$('.brand__thumbnail').change(function(e){
+    e.preventDefault();
+    let display_image =  $(this).closest('.brand__imgArea').find('img');
+    let image_upload = URL.createObjectURL(e.target.files[0]);
+    display_image.attr('src', image_upload);   
+});   
+</script>
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
