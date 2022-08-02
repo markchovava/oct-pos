@@ -6,13 +6,13 @@
 <div id="content" class="app-content">
     <ul class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">DASHBOARD</a></li>
-        <li class="breadcrumb-item active">SALES</li>
+        <li class="breadcrumb-item active">STOCK</li>
     </ul>
     <h1 class="page-header">
-        Product Sold
+        Product Stock
     </h1>
     <div class="row mb-4">
-        <form method="get" action="{{ route('admin.sale.search') }}" class="col-sm-5">
+        <form method="get" action="{{ route('admin.stock.search') }}" class="col-sm-5">
             <div class="input-group flex-nowrap">
                 <input type="text" class="form-control" name="search" 
                 value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}" placeholder="Product Name">
@@ -23,7 +23,7 @@
         </form>
         <div class="col-sm-7 text-end">
             <a href="{{ route('admin.pos') }}">
-                <button type="button" class="btn btn-outline-secondary">Add Sales</button>
+                <button type="button" class="btn btn-outline-secondary">Add Stock</button>
             </a>
         </div>
     </div>
@@ -35,29 +35,25 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
+                            <th style="width: 15%;" scope="col"># </th>
                             <th style="width: 30%;" scope="col">Name </th>
-                            <th style="width: 20%;" scope="col">Quantity </th>
-                            <th style="width: 15%;" scope="col">Currency </th>
-                            <th style="width: 15%;" scope="col">Total </th>
+                            <th style="width: 20%;" scope="col">Barcode </th>
+                            <th style="width: 15%;" scope="col">Quantity </th>
                             <th style="width: 20%;" scope="col">Action</th>
                         </tr>
                     </thead>
                         <tbody>
-                            @if( isset($sales) )
-                                @foreach( $sales as $sale )
+                            @if( isset($products) )
+                                @php($i = 1)
+                                @foreach( $products as $product )
                                 <tr>
-                                    <td> {{ $sale->product_name }} </td>
-                                    <td> {{ $sale->quantity }} </td>      
-                                    <td> {{ $sale->currency }} </td>      
-                                    <td> 
-                                       @php
-                                            $sale = (int)$sale->product_total / 100
-                                       @endphp
-                                        ${{ number_format((float)$sale,2,'.','') }}
-                                    </td>      
+                                <td> {{ $i++ }}</td>  
+                                    <td> {{ $product->name }} </td>
+                                    <td> {{ $product->barcode }} </td>      
+                                    <td> {{ $product->stock->quantity }} </td>          
                                     <td>
-                                        <a href="#" class="icon__info">
-                                            <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
+                                        <a href="{{ route('admin.stock.edit', $product->id) }}" class="icon__success">
+                                            <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -65,20 +61,16 @@
                             @endif
 
                             @if( isset($results) )
-                                @foreach( $results as $sale )
+                                @php($i = 1)
+                                @foreach( $results as $result )
                                 <tr>
-                                    <td> {{ $sale->product_name }} </td>
-                                    <td> {{ $sale->quantity }} </td>      
-                                    <td> {{ $sale->currency }} </td>      
-                                    <td> 
-                                       @php
-                                            $sale = (int)$sale->product_total / 100
-                                       @endphp
-                                        ${{ number_format((float)$sale,2,'.','') }}
-                                    </td>      
+                                <td> {{ $i++ }}</td>  
+                                    <td> {{ $result->name }} </td>
+                                    <td> {{ $result->barcode }} </td>      
+                                    <td> {{ $result->stock->quantity }} </td>          
                                     <td>
-                                        <a href="#" class="icon__info">
-                                            <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
+                                        <a href="{{ route('admin.stock.edit', $result->id) }}" class="icon__success">
+                                            <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
                                     </td>
                                 </tr>

@@ -9,8 +9,11 @@ use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\POS\POSController;
+use App\Http\Controllers\Price\PriceController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Role\RoleController;
+use App\Http\Controllers\Sale\SaleController;
+use App\Http\Controllers\Stock\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +65,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     
     Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
 
+    Route::prefix('price')->group(function() {
+        Route::get('/', [PriceController::class, 'index'])->name('admin.price.index');
+        Route::get('/edit/{id}', [PriceController::class, 'edit'])->name('admin.price.edit');
+        Route::post('/update/{id}', [PriceController::class, 'update'])->name('admin.price.update');
+        Route::get('/search', [PriceController::class, 'search'])->name('admin.price.search');
+    });
+
     Route::prefix('product')->group(function() {
         Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
         Route::get('/add', [ProductController::class, 'add'])->name('admin.product.add');
@@ -78,6 +88,25 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::post('/role/update/{id}', [RoleController::class, 'update'])->name('admin.role.update');
     Route::get('/role/delete/{id}', [RoleController::class, 'delete'])->name('admin.role.delete');
     Route::get('/role/search', [RoleController::class, 'search'])->name('admin.role.search');
+
+    Route::prefix('user')->group(function() {
+        Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+    });
+
+    /* Sales */
+    Route::prefix('sale')->group(function() {
+        Route::get('/', [SaleController::class, 'index'])->name('admin.sale.index');
+        Route::get('/add', [SaleController::class, 'add'])->name('admin.sale.add');
+        Route::get('/view', [SaleController::class, 'view'])->name('admin.sale.view');
+        Route::get('/search', [SaleController::class, 'search'])->name('admin.sale.search');
+    });
+
+    Route::prefix('stock')->group(function() {
+        Route::get('/', [StockController::class, 'index'])->name('admin.stock.index');
+        Route::get('/search', [StockController::class, 'search'])->name('admin.stock.search');
+        Route::get('/edit/{id}', [StockController::class, 'edit'])->name('admin.stock.edit');
+        Route::post('/update/{id}', [StockController::class, 'update'])->name('admin.stock.update');
+    });
 
     Route::prefix('order')->group(function() {
         Route::get('/', [OrderController::class, 'index'])->name('admin.order.index');

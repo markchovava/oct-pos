@@ -51,49 +51,13 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
-							<span class="menu-text">Sales</span>
-							<span class="menu-caret"><b class="caret"></b></span>
-						</a>
-						<div class="menu-submenu">
-							<div class="menu-item">
-								<a href="#" class="menu-link">
-									<span class="menu-text">Inbox</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
-							<span class="menu-icon">
-								<i class="fas fa-gift"></i>
-							</span>
 							<span class="menu-text">Stock</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" class="menu-link">
-									<span class="menu-text">Inbox</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="{{ route('admin.stock.index') }}" class="menu-link">
+									<span class="menu-text">Product Stock</span>
 								</a>
 							</div>
 						</div>
@@ -103,23 +67,18 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
-							<span class="menu-text">Customers</span>
+							<span class="menu-text">Users</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="{{ route('admin.customer') }}" class="menu-link">
-									<span class="menu-text">Customer List</span>
+								<a href="{{ route('admin.user.index') }}" class="menu-link">
+									<span class="menu-text">User List</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="#" class="menu-link">
+									<span class="menu-text">Operators</span>
 								</a>
 							</div>
 						</div>
@@ -155,23 +114,13 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
-							<span class="menu-text">Operations</span>
+							<span class="menu-text">Sales</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" class="menu-link">
-									<span class="menu-text">Inbox</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="{{ route('admin.sale.index') }}" class="menu-link">
+									<span class="menu-text">Sales Report</span>
 								</a>
 							</div>
 						</div>
@@ -181,23 +130,13 @@
 							<span class="menu-icon">
 								<i class="bi bi-envelope"></i>
 							</span>
-							<span class="menu-text">Messages</span>
+							<span class="menu-text">Pricing</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="email_inbox.html" class="menu-link">
-									<span class="menu-text">Inbox</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Compose</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="{{ route('admin.price.index') }}" class="menu-link">
+									<span class="menu-text">Price List</span>
 								</a>
 							</div>
 						</div>
