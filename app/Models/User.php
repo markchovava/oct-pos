@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Operation\Operation;
+use App\Models\User\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +14,19 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+     /**
+     *  One to One 
+     **/
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id', 'level');
+    }
+    /**
+     *  One to Many 
+     **/
+    public function operations(){
+        return $this->hasMany(Operation::class, 'user_id', 'id');
+    }
+
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -24,8 +39,11 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name', 'password', 'email', 'role_id',  'first_name', 'last_name', 'phone_number', 
-        'address', 'id_number',	'date_of_birth', 'gender', 'marital_status', 'image',
+        'name', 'password', 'email', 'role_id', 
+        'code',  'first_name', 'last_name', 
+        'phone_number', 'address', 'id_number',	
+        'date_of_birth', 'gender', 
+        'marital_status', 'image',
     ];
 
     /**
@@ -58,9 +76,4 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-
-    /* One to One */
-    public function role(){
-        return $this->belongsTo(Tax::class, 'role_id', 'id');
-    }
 }

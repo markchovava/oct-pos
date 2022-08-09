@@ -45,22 +45,24 @@
                         <tbody>
                             @if( isset($products) )
                                 @php($i = 1)
-                                @foreach( $products as $product )
+                                @foreach( $products as $price )
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $price->name }}</td>
                                     <td>
-                                        @php( $usd = intval($product->price->usd) / 100 )
+                                        @php( $usd = intval($price->price->usd) / 100 )
                                         ${{ number_format($usd, 2, '.', '') }}   
                                     </td>
                                     <td>
-                                        @php( $zwl = intval($product->price->zwl) / 100 )
+                                        @php( $zwl = intval($price->price->zwl) / 100 )
                                         ${{ number_format($zwl, 2, '.', '') }}   
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.price.edit', $product->id) }}" class="icon__success">
+                                        @can('create', $price) 
+                                        <a href="{{ route('admin.price.edit', $price->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach
@@ -75,9 +77,11 @@
                                     <td> {{ $result->price->usd }} </td>      
                                     <td> {{ $result->price->zwl }} </td>           
                                     <td>
+                                        @can('create', $result)
                                         <a href="{{ route('admin.price.edit', $result->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

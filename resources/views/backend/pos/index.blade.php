@@ -176,6 +176,12 @@
 															<span class="name__text"></span>
 															<input type="hidden" class="name__value">
 															<input type="hidden" class="product__idValue">
+															&nbsp;
+															<small class="text-success">
+																<input type="hidden" class="stock">
+																Qty: <b><span class="stock__quantityText"></span></b>
+																<input type="hidden" class="stock__quantityValue">
+															</small>
 														</td>
 														<td class="product__barcodeArea">
 															<span class="barcode__text"></span>
@@ -292,23 +298,23 @@
 							<!-- BEGIN pos-sidebar-footer -->
 							<div class="pos-sidebar-footer">
 								<div class="d-flex align-items-center mb-2">
-									<div>Subtotal</div>
-									<div class="flex-1 text-end h6 mb-0">
-										$<span class="subtotal__text"></span>
-										<input type="hidden" name="subtotal" class="subtotal__value">
-										
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-2">
-									<div>Taxes (15%)</div>
+									<div>Taxes ({{ $tax->percent }}%)</div>
 									<div class="flex-1 text-end h6 mb-0">
 										<span class="tax__text"></span>
+										<input type="hidden" name="tax_percent" value="{{ $tax->percent }}">
 										<input type="hidden" name="tax" class="tax__value">
 									</div>
 								</div>
 								<hr />
 								<div class="d-flex align-items-center mb-2">
-									<div>Total</div>
+									<div>Subtotal</div>
+									<div class="flex-1 text-end h6 mb-0">
+										$<span class="subtotal__text"></span>
+										<input type="hidden" name="subtotal" class="subtotal__value">	
+									</div>
+								</div>
+								<div class="d-flex align-items-center mb-2">
+									<div>Grandtotal</div>
 									<div class="flex-1 text-end h4 mb-0">
 										$<span class="grandtotal__text"></span>
 										<input type="hidden" name="grandtotal" class="grandtotal__value">

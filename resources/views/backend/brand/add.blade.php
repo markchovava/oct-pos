@@ -23,14 +23,14 @@
                 <div class="profile-container">
                     <!-- BEGIN profile-sidebar -->
                     <div class="profile-sidebar">
-                        <div class="desktop-sticky-top brand__imgArea">
+                        <div class="desktop-sticky-top img__area">
                             <div class="nav-field mb-3">Brand Thumbnail</div>
                             <div class="mb-3 img__aspect5by4" 
                             style="border-radius:5px; border:1px solid rgba(255,255,255,.3)">
                                 <img style="width:100%; height:100%; object-fit:cover;" />
                             </div>
                             <div class="form-group mb-3">
-                                <input type="file" name="image" class="brand__thumbnail form-control">
+                                <input type="file" name="image" class="img__thumbnail form-control">
                             </div>
                             <!-- profile info -->
                             <hr class="mt-4 mb-4" />

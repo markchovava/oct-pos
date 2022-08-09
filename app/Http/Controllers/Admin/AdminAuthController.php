@@ -27,8 +27,11 @@ class AdminAuthController extends Controller
             'password' => 'required|confirmed'
         ]);
         $user = new User();
-        $user->role_id = $request->role_id;
+        $user->role_id = 4;
         $user->name = $request->name;
+        $name = explode(" ", $request->name);
+        $user->first_name = isset($name[0]) ? $name[0] : '';
+        $user->last_name = isset($name[1]) ? $name[1] : '' ;
         $user->email = $request->email;
         $user->gender = $request->gender;
         $user->password = Hash::make($request->password);
@@ -50,10 +53,12 @@ class AdminAuthController extends Controller
         $user_id = Auth::id();
         /* Insert End Time of a session */
         $operation = Operation::where('user_id', $user_id)->first();
-        $operation->status = 0;
-        $operation->end_time = now();
-        $operation->save();
-
+        if( isset($operation) ){
+            $operation->status = 0;
+            $operation->end_time = now();
+            $operation->save();
+        }
+        /*  */
         Session::flush();
         Auth::logout();
         return redirect()->route('login');

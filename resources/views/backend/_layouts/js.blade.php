@@ -28,9 +28,9 @@ $route = url()->current();
 
 <script>
 //Display Brand image on upload in add and edit page
-$('.brand__thumbnail').change(function(e){
+$('.img__thumbnail').change(function(e){
     e.preventDefault();
-    let display_image =  $(this).closest('.brand__imgArea').find('img');
+    let display_image =  $(this).closest('.img__area').find('img');
     let image_upload = URL.createObjectURL(e.target.files[0]);
     display_image.attr('src', image_upload);   
 });   

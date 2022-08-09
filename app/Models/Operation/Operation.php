@@ -10,7 +10,7 @@ class Operation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'start_time', 'end_time', 'usd_total', 'zwl_total'
+        'user_id', 'start_time', 'end_time', 'status', 'usd_total', 'zwl_total'
     ];
 
     public function operation_items(){

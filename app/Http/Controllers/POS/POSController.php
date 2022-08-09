@@ -7,6 +7,8 @@ use App\Models\Operation\Operation;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\Product\Product;
+use App\Models\Stock\Stock;
+use App\Models\Tax\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +17,9 @@ use Illuminate\Support\Facades\DB;
 class POSController extends Controller
 {
     public function index(){
-        return view('backend.pos.index');
+        $tax = Tax::first();
+        $data['tax'] = $tax;
+        return view('backend.pos.index', $data);
    }
 
     public function searchbyname(Request $request){
@@ -104,8 +108,13 @@ class POSController extends Controller
                             $item->product_total = $request->product_total[$i];
                             $item->created_at = now();
                             $item->save();
+                            /* Stock */
+                            $stock = Stock::where('product_id', $request->product_id[$i])->first();
+                            $stock->quantity -= (int)$request->product_quantity[$i]; // Deduct Stock
+                            $stock->save();
                         }
-                }
+                    }
+
                 }			
                 
             });

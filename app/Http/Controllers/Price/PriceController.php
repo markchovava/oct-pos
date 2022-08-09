@@ -17,7 +17,7 @@ class PriceController extends Controller
     }
 
     public function edit($id){
-        $product = Product::with('stock')->where('id', $id)->first();
+        $product = Product::with(['price','stock'])->where('id', $id)->first();
         $data['product'] = $product;
         return view('backend.price.edit', $data);
     }

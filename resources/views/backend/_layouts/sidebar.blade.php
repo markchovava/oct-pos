@@ -5,6 +5,7 @@
 				<!-- BEGIN menu -->
 				<div class="menu">
 					<div class="menu-header">Navigation</div>
+					@if( Auth::check() && Auth::user()->role_id <= 4 )
 					<div class="menu-item active">
 						<a href="{{ route('admin.dashboard') }}" class="menu-link">
 							<span class="menu-icon"><i class="bi bi-cpu"></i></span>
@@ -19,6 +20,7 @@
 							<span class="menu-text">Point Of Sale</span>
 						</a>
 					</div>
+					@if( Auth::user()->role_id <= 3 )
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
@@ -51,6 +53,29 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
+							<span class="menu-text">Operations</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							@if( Auth::user()->role_id <= 2 )
+							<div class="menu-item">
+								<a href="{{ route('admin.operation.list') }}" class="menu-link">
+									<span class="menu-text">Operation</span>
+								</a>
+							</div>
+							@endif
+							<div class="menu-item">
+								<a href="{{ route('admin.order.index') }}" class="menu-link">
+									<span class="menu-text">Orders</span>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fas fa-gift"></i>
+							</span>
 							<span class="menu-text">Stock</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
@@ -67,6 +92,24 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
+							<span class="menu-text">Pricing</span>
+							<span class="menu-caret"><b class="caret"></b></span>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="{{ route('admin.price.index') }}" class="menu-link">
+									<span class="menu-text">Price List</span>
+								</a>
+							</div>
+						</div>
+					</div>	
+					@endif
+					@if( Auth::user()->role_id <= 2 )
+					<div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<span class="menu-icon">
+								<i class="fas fa-gift"></i>
+							</span>
 							<span class="menu-text">Users</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
@@ -77,34 +120,8 @@
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" class="menu-link">
+								<a href="{{ route('admin.operation.index') }}" class="menu-link">
 									<span class="menu-text">Operators</span>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
-							<span class="menu-icon">
-								<i class="fas fa-gift"></i>
-							</span>
-							<span class="menu-text">Orders</span>
-							<span class="menu-caret"><b class="caret"></b></span>
-						</a>
-						<div class="menu-submenu">
-							<div class="menu-item">
-								<a href="#" class="menu-link">
-									<span class="menu-text">Inbox</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Tst</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
 								</a>
 							</div>
 						</div>
@@ -128,7 +145,7 @@
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
-								<i class="bi bi-envelope"></i>
+								<i class="fas fa-gift"></i>
 							</span>
 							<span class="menu-text">Pricing</span>
 							<span class="menu-caret"><b class="caret"></b></span>
@@ -140,7 +157,7 @@
 								</a>
 							</div>
 						</div>
-					</div>
+					</div>					
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
@@ -156,17 +173,14 @@
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="email_compose.html" class="menu-link">
-									<span class="menu-text">Compose</span>
-								</a>
-							</div>
-							<div class="menu-item">
-								<a href="email_detail.html" class="menu-link">
-									<span class="menu-text">Detail</span>
+								<a href="{{ route('admin.tax.edit') }}" class="menu-link">
+									<span class="menu-text">Tax</span>
 								</a>
 							</div>
 						</div>
 					</div>
+					@endif
+					@endif
 					
 					
 				</div>
