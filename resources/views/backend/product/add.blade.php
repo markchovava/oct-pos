@@ -17,52 +17,110 @@
                     <!-- BEGIN profile-sidebar -->
                     <div class="profile-sidebar">
                         <div class="desktop-sticky-top">
-                            <div class="nav-field">Product Thumbnail</div>
-                            <div class="profile-img">
-                                <img src="#" alt="" />
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="form-label" for="exampleFormControlFile1">Upload Product Thumbnail</label>
-                                <input type="file" name="image" class="form-control" id="exampleFormControlFile1">
-                            </div>
-                            <!-- profile info -->
-                            <hr class="mt-4 mb-4" />
-                            <div class="row category__row">
-                                <div class="col-sm-12 ">
-                                    <div class="nav-field mb-2">Categories</div>
-                                    <select name="category[]" class="form-select mb-3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>Default select</option>
-                                    </select>
+                            <div class="desktop-sticky-top img__area">
+                                <div class="nav-field mb-3">Thumbnail</div>
+                                <div class="mb-3 img__aspect5by4" 
+                                style="border-radius:5px; border:1px solid rgba(255,255,255,.3)">
+                                    <img style="width:100%; height:100%; object-fit:cover;" />
                                 </div>
-                            </div>
+                                <div class="form-group mb-3">
+                                    <input type="file" name="image" class="img__thumbnail form-control">
+                                </div>
 
-                            <hr class="mt-4 mb-4" />
-                            <div class="row brand__row">
-                                <div class="col-sm-12">
-                                    <div class="nav-field mb-2">Brands</div>
-                                    <select name="brand[]" class="form-select mb-3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>Default select</option>
-                                    </select>
+                                <!--  -->
+                                <hr class="mt-4 mb-4" />
+                                <div class="row category__row">
+                                    <div class="col-sm-12 ">
+                                        <div class="nav-field mb-4">Categories
+                                            <button type="button" style="float:right"
+                                            class="btn btn-sm btn-outline-success add__categoryBtn">
+                                                <i class="far fa-fw fa-clone"></i>
+                                            </button>
+                                        </div>
+                                        <section class="category__insert">
+                                            <div class="category__select mb-4 display__none">
+                                                <select class="form-select mb-2 category">
+                                                    <option value="">Default select</option>
+                                                    @if( isset($categories) )
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option value="">No Brands.</option>
+                                                    @endif
+                                                </select>
+                                                <button type="button" class="btn btn-sm btn-outline-danger remove__categoryBtn">
+                                                    <i class="fas fa-fw fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="category__select mb-4">
+                                                <select name="category[]" class="form-select mb-2">
+                                                    <option value="">Default select</option>
+                                                    @if( isset($categories) )
+                                                        @foreach($categories as $category)
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option value="">No Brands.</option>
+                                                    @endif
+                                                </select>
+                                                <button type="button" class="btn btn-sm btn-outline-danger remove__categoryBtn">
+                                                    <i class="fas fa-fw fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </section>
+                                    </div>
                                 </div>
+                                <!--  -->
+                                <!--  -->
+                                <hr class="mt-4 mb-4" />
+                                <div class="row brand__row">
+                                    <div class="col-sm-12">
+                                        <div class="nav-field mb-4">Brands
+                                            <button type="button" style="float:right"
+                                            class="btn btn-sm btn-outline-success add__brandBtn">
+                                                <i class="far fa-fw fa-clone"></i>
+                                            </button>
+                                        </div>
+                                        <section class="brand__insert">
+                                            <div class="brand__select mb-4 display__none">
+                                                <select class="form-select mb-2 brand">
+                                                    <option value="">Default select</option>
+                                                    @if( isset($brands) )
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option value="">No Brands.</option>
+                                                    @endif
+                                                </select>
+                                                <button type="button" class="btn btn-sm btn-outline-danger remove__brandBtn">
+                                                    <i class="fas fa-fw fa-times"></i>
+                                                </button>
+                                            </div>
+                                            <div class="brand__select mb-4">
+                                                <select name="brand[]" class="form-select mb-2 brand">
+                                                    <option value="">Default select</option>
+                                                    @if( isset($brands) )
+                                                        @foreach($brands as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option value="">No Brands.</option>
+                                                    @endif
+                                                </select>
+                                                <button type="button" class="btn btn-sm btn-outline-danger remove__brandBtn">
+                                                    <i class="fas fa-fw fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <hr class="mt-4 mb-4" />
+                                
                             </div>
-
-                            <hr class="mt-4 mb-4" />
-                            <div class="row category__row">
-                                <div class="col-sm-12">
-                                    <div class="nav-field mb-2">Tags</div>
-                                    <select name="tag[]" class="form-select mb-3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>Default select</option>
-                                    </select>
-                                </div>
-                            </div>                
-                            <hr class="mt-4 mb-4" />
-                    
+                
+                            
                         </div>
                     </div>
                     <!-- END profile-sidebar -->
@@ -111,31 +169,6 @@
                                                             <div class="form-group mb-3">
                                                                 <label class="form-label" for="usd">USD:</label>
                                                                 <input type="number" name="usd" class="form-control" id="usd" placeholder="Product Name">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-arrow">
-                                                    <div class="card-arrow-top-left"></div>
-                                                    <div class="card-arrow-top-right"></div>
-                                                    <div class="card-arrow-bottom-left"></div>
-                                                    <div class="card-arrow-bottom-right"></div>
-                                                </div>
-                                            </div>
-                                            <div class="card mb-3">
-                                                <div class="card-body">
-                                                    <h5 class="mb-3">Specifications</h5>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group mb-3">
-                                                                <label class="form-label" for="spec_name">Name:</label>
-                                                                <input type="name" name="spec_name[]" class="form-control" id="spec_name" placeholder="Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <div class="form-group mb-3">
-                                                                <label class="form-label" for="spec_value">Value:</label>
-                                                                <input type="name" name="spec_value[]" class="form-control" id="spec_value" placeholder="Value">
                                                             </div>
                                                         </div>
                                                     </div>

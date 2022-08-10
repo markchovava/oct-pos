@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Operation\Operation' => 'App\Policies\Operation\OperationPolicy',
         'App\Models\Order\Order' => 'App\Policies\Order\OrderPolicy',
         'App\Models\Tax\Tax' => 'App\Policies\Tax\TaxPolicy',
-        'App\Models\Role\Role' => 'App\Policies\Role\RolePolicy',
+        'App\Models\User\Role' => 'App\Policies\Role\RolePolicy',
         'App\Models\Product\Product' => 'App\Policies\Product\ProductPolicy',
     ];
 

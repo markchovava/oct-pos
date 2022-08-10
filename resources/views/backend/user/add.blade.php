@@ -27,7 +27,6 @@
                             </div>
                             <!-- profile info -->
                             <hr class="mt-4 mb-4" />
-                    
                         </div>
                     </div>
                     <!-- END profile-sidebar -->

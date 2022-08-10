@@ -65,7 +65,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        return $user->role_id <= 2;
+        return $user->role_id <= 1;
     }
 
     /**
@@ -77,7 +77,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role)
     {
-        return $user->role_id <= 2;
+        return $user->role_id <= 1;
     }
 
     /**
@@ -89,6 +89,6 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role)
     {
-        return $user->role_id <= 2;
+        return $user->role_id <= 1;
     }
 }

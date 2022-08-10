@@ -58,12 +58,16 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @can('create', $role)
                                         <a href="{{ route('admin.role.edit', $role->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
+                                        @endcan
+                                        @can('delete', $role)
                                         <a href="{{ route('admin.role.delete', $role->id) }}" class="icon__danger">
                                             <i class="fas fa-lg fa-fw me-2 fa-trash-alt"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach
@@ -86,12 +90,16 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @can('create', $result)
                                         <a href="{{ route('admin.role.edit', $result->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
+                                        @endcan
+                                        @can('delete', $result)
                                         <a href="{{ route('admin.role.delete', $result->id) }}" class="icon__danger">
                                             <i class="fas fa-lg fa-fw me-2 fa-trash-alt"></i>
                                         </a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach

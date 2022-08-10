@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand\Brand;
+use App\Models\Category\Category;
 use App\Models\Product\Price;
 use App\Models\Product\Product;
 use App\Models\Product\ProductBrand;
@@ -21,7 +23,11 @@ class ProductController extends Controller
     }
 
     public function add(){
-        return view('backend.product.add');
+        $categories = Category::orderBy('name', 'asc')->get();
+        $data['categories'] = $categories;
+        $brands = Brand::orderBy('name', 'asc')->get();
+        $data['brands'] = $brands;
+        return view('backend.product.add', $data);
     }
 
     public function store(Request $request){
@@ -48,20 +54,7 @@ class ProductController extends Controller
                 }              
             }
             $product->save();
-            /**
-             *    Specification
-             **/
-            $spec_name = $request->spec_name;
-            if( isset($spec_name) && isset($spec_value) ){
-                $count_name = count($spec_name);
-                for($i = 0; $i < $count_name; $i++){
-                    $spec = new Specification();
-                    $spec->product_id = $product->id;
-                    $spec->spec_name = $request->spec_name[$i];
-                    $spec->spec_value = $request->spec_value[$i];
-                    $spec->save();           
-                }
-            } 
+           
             /**
              *    Brands 
              **/
@@ -122,10 +115,12 @@ class ProductController extends Controller
     public function edit($id){
         $data['stock'] = Stock::where('product_id', $id)->first();
         $data['price'] = Price::where('product_id', $id)->first();
-        $data['specifications'] = Specification::where('product_id', $id)->get();
-        $data['brands'] = Stock::where('product_id', $id)->get();
-        $data['categories'] = Stock::where('product_id', $id)->get();
-        $data['tags'] = Stock::where('product_id', $id)->get();
+        $categories = Category::orderBy('name', 'asc')->get();
+        $data['categories'] = $categories;
+        $brands = Brand::orderBy('name', 'asc')->get();
+        $data['brands'] = $brands;
+        $data['db_brands'] = Brand::where('product_id', $id)->get();
+        $data['db_categories'] = Category::where('product_id', $id)->get();
         $data['product'] = Product::with(['stock', 'tags', 'brands', 'categories', 'specifications'])
                                 ->find($id);
         return view('backend.product.edit', $data);
@@ -170,21 +165,6 @@ class ProductController extends Controller
             $stock->product_id = $product->id;
             $stock->quantity = $request->quantity;
             $stock->save();
-            /**
-             *    Specification
-             **/
-            $spec_name = $request->spec_name;
-            if( isset($spec_name) && isset($spec_value) ){
-                $spec = Specification::where('product_id', $id)->delete();
-                $count_name = count($spec_name);
-                for($i = 0; $i < $count_name; $i++){
-                    $spec = new Specification();
-                    $spec->product_id = $product->id;
-                    $spec->spec_name = $request->spec_name[$i];
-                    $spec->spec_value = $request->spec_value[$i];
-                    $spec->save();           
-                }
-            } 
             /**
              *    Brands 
              **/

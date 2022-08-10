@@ -21,8 +21,11 @@
             </div>
         </div>
         <div class="col-sm-7 text-end">
-            <a href="{{ route('admin.product.add') }}"></a>
-            <button type="button" class="btn btn-outline-secondary">Add Product</button>
+            <a href="{{ route('admin.product.add') }}">
+                <button type="button" class="btn btn-outline-secondary">
+                    Add Product
+                </button>
+            </a>
         </div>
     </div>
     <div class="row gx-4">
