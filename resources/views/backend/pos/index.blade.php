@@ -247,8 +247,8 @@
                             </div>
                             <div id="amount__paidInsert" class="pos-sidebar-header" style="padding-top: 0.3rem;">
                                 <div class="input-group flex-nowrap">
-                                    <input type="text" name="amount_paid" class="form-control amount__paidValue" id=""
-                                        placeholder="00.00">
+                                    <input type="text" class="form-control amount__paidValue" id="" placeholder="00.00">
+                                    <input type="hidden" name="amount_paid" class="amount__paidCentsValue">
                                     <span id="amount__confirmBtn" class="input-group-text btn amount__confirmBtn">
                                         <i class="fas fa-lg fa-fw me-2 fa-check"></i>
                                     </span>
@@ -339,7 +339,7 @@
 									<div>Change</div>
 									<div class="flex-1 text-end h6 mb-0">
 										$<span class="change__text"></span>
-										<input type="hidden" name="change" class="change__value">	
+										<input type="hidden" name="customer_change" class="change__value">	
 									</div>
 								</div>
 								<div class="mt-3">

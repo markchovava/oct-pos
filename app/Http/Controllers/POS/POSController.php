@@ -78,6 +78,8 @@ class POSController extends Controller
                 $order->transaction_id = $transaction_id;
                 $order->subtotal = $request->subtotal;
                 $order->tax = $request->tax;
+                $order->amount_paid = $request->amount_paid;
+                $order->change = $request->customer_change;
                 $order->grandtotal = $request->grandtotal;
                 $order->currency = $request->currency;
                 $order->notes = $request->notes;

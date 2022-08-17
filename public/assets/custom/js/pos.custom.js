@@ -437,6 +437,7 @@ $(document).on('change', '.quantity__value', function(){
 **/
 $(document).on('click', '#amount__confirmBtn', function(){
     let amount_paidValue = $(this).closest('#amount__paidInsert').find('.amount__paidValue').val();
+    let amount_paidCentsValue = $('.amount__paidCentsValue');
     let grandtotal_value = $('.grandtotal__value').val();   
     let change_text = $('.change__text');
     let change_value = $('.change__value');
@@ -451,8 +452,9 @@ $(document).on('click', '#amount__confirmBtn', function(){
     if( !isNaN(change)){
         change_text.text(change_decimal)
         change_value.val(change)
+        amount_paidCentsValue.val(amount_paidNumber);
     }else{
-        alert('Please enter the in amount in the following format: 00.00');
+        alert('Please enter in the following format: 00.00');
         return false;
     }
     
