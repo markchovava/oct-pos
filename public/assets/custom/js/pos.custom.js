@@ -437,15 +437,26 @@ $(document).on('change', '.quantity__value', function(){
 **/
 $(document).on('click', '#amount__confirmBtn', function(){
     let amount_paidValue = $(this).closest('#amount__paidInsert').find('.amount__paidValue').val();
-    alert(amount_paidValue)
-    // If not empty
-    if(amount_paidValue != ""){
-        let amount_paidCents = amount_paidValue.val() * 100;
-        alert(amount_paidCents)
-    } else{
+    let grandtotal_value = $('.grandtotal__value').val();   
+    let change_text = $('.change__text');
+    let change_value = $('.change__value');
+    // Calculate
+    let amount_paidCents = amount_paidValue * 100;
+    let amount_paidNumber = Number(amount_paidCents);
+    let grandtotal_number = Number(grandtotal_value)
+    let change = amount_paidNumber - grandtotal_number;
+    let change_calculate = change / 100;
+    let change_decimal = change_calculate.toFixed(2);
+    // Output
+    if( !isNaN(change)){
+        change_text.text(change_decimal)
+        change_value.val(change)
+    }else{
+        alert('Please enter the in amount in the following format: 00.00');
         return false;
     }
-})
+    
+});
 
 /**
  *    Clear Prices

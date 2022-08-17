@@ -248,7 +248,7 @@
                             <div id="amount__paidInsert" class="pos-sidebar-header" style="padding-top: 0.3rem;">
                                 <div class="input-group flex-nowrap">
                                     <input type="text" name="amount_paid" class="form-control amount__paidValue" id=""
-                                        value="123.45" placeholder="00.00">
+                                        placeholder="00.00">
                                     <span id="amount__confirmBtn" class="input-group-text btn amount__confirmBtn">
                                         <i class="fas fa-lg fa-fw me-2 fa-check"></i>
                                     </span>
