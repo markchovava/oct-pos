@@ -22,6 +22,17 @@ class ProductController extends Controller
         return view('backend.product.index', $data);
     }
 
+    public function view($id){
+        $product = Product::with(['stock', 'price', 'brands', 'categories'])
+        ->find($id);
+        $stock = Stock::where('product_id', $id)->first();
+        $price = Price::where('product_id', $id)->first();
+        $data['product'] = $product;
+        $data['stock'] = $stock;
+        $data['price'] = $price;
+        return view('backend.product.view', $data);
+    }
+
     public function add(){
         $categories = Category::orderBy('name', 'asc')->get();
         $data['categories'] = $categories;
@@ -119,8 +130,8 @@ class ProductController extends Controller
         $data['categories'] = $categories;
         $brands = Brand::orderBy('name', 'asc')->get();
         $data['brands'] = $brands;
-        $data['db_brands'] = Brand::where('product_id', $id)->get();
-        $data['db_categories'] = Category::where('product_id', $id)->get();
+        $data['db_brands'] = ProductBrand::where('product_id', $id)->get();
+        $data['db_categories'] = ProductCategory::where('product_id', $id)->get();
         $data['product'] = Product::with(['stock', 'tags', 'brands', 'categories', 'specifications'])
                                 ->find($id);
         return view('backend.product.edit', $data);
@@ -133,6 +144,7 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->barcode = $request->barcode;
             $product->status = $request->status;
+            $product->updated_at = now();
             if( $request->file('image') ){
                 $image = $request->file('image');
                 $image_extension = strtolower($image->getClientOriginalExtension());
@@ -169,6 +181,7 @@ class ProductController extends Controller
              *    Brands 
              **/
             $brands = $request->brand;
+            //dd($brands);
             if(isset($brands)){
                 $brand = ProductBrand::where('product_id', $id)->delete();
                 foreach($brands as $brand){

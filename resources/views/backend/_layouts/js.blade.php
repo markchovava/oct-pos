@@ -7,8 +7,6 @@ $route = url()->current();
 <script src="{{ asset('assets/hud/assets/js/app.min.js') }}"></script>
 <!-- ================== END core-js ================== -->
 
-<script src="{{ asset('assets/custom/js/product.custom.js') }}"></script>
-<script src="{{ asset('assets/custom/js/pos.custom.js') }}"></script>
 
 @if( $route == route('admin.dashboard'))
 <!-- ================== BEGIN page-js ================== -->
@@ -24,6 +22,11 @@ $route = url()->current();
 <script src="{{ asset('assets/hud/assets/js/demo/pos-customer-order.demo.js') }}"></script>
 <!-- ================== END page-js ================== -->
 @endif
+
+<!-- Custom JS -->
+<script src="{{ asset('assets/custom/js/product.custom.js') }}"></script>
+<script src="{{ asset('assets/custom/js/pos.custom.js') }}"></script>
+<script src="{{ asset('assets/custom/js/calculator.custom.js') }}"></script>
 
 
 <script>

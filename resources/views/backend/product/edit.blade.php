@@ -8,7 +8,7 @@
 <div id="content" class="app-content">
     <div class="card">
         <div class="card-body p-0">
-            <form method="post" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('admin.product.update', $product->id) }}" enctype="multipart/form-data">
             @csrf
             <!-- BEGIN profile -->
             <div class="profile">
@@ -21,7 +21,8 @@
                                 <div class="nav-field mb-3">Thumbnail</div>
                                 <div class="mb-3 img__aspect5by4" 
                                 style="border-radius:5px; border:1px solid rgba(255,255,255,.3)">
-                                    <img style="width:100%; height:100%; object-fit:cover;" />
+                                    <img src="{{ (!empty($product->image)) ? url('storage/products/thumbnail/' . $product->image) : url('storage/products/thumbnail/no_image.jpg') }}"
+                                    style="width:100%; height:100%; object-fit:cover;" />
                                 </div>
                                 <div class="form-group mb-3">
                                     <input type="file" name="image" class="img__thumbnail form-control">
@@ -69,6 +70,20 @@
                                                 </button>
                                             </div>
                                         </section>
+                                        <section class="category__insertDB">
+                                            @if( isset($product->categories) )
+                                                @foreach($product->categories as $category)
+                                                    <div class="category__select mb-4">
+                                                        <select name="category[]" class="form-select mb-2">
+                                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger remove__categoryBtn">
+                                                            <i class="fas fa-fw fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </section>
                                     </div>
                                 </div>
                                 <!--  -->
@@ -113,6 +128,20 @@
                                                     <i class="fas fa-fw fa-times"></i>
                                                 </button>
                                             </div>
+                                        </section>
+                                        <section class="brand__insertDB">
+                                            @if( isset($product->categories) )
+                                                @foreach($product->brands as $brand)
+                                                    <div class="brand__select mb-4">
+                                                        <select name="brand[]" class="form-select mb-2 brand">
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger remove__brandBtn">
+                                                            <i class="fas fa-fw fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                @endforeach 
+                                            @endif
                                         </section>
                                     </div>
                                 </div>
@@ -212,7 +241,7 @@
                                         <div class="mt-4 mb-3">
                                             <div class="row">
                                                 <div class="col-sm-12 text-end">
-                                                    <button type="submit" class="btn btn-outline-success">Add Product</button>
+                                                    <button type="submit" class="btn btn-outline-success">Update Product</button>
                                                 </div>
                                             </div>
                                         </div>

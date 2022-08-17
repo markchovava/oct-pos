@@ -7,6 +7,7 @@ $route = url()->current();
 <link href="{{ asset('assets/hud/assets/css/app.min.css') }}" rel="stylesheet" />
 <!-- ================== END core-css ================== -->
 
+<link href="{{ asset('assets/custom/css/calculator.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/custom/css/custom.css') }}" rel="stylesheet" />
 
 @if( $route == route('admin.dashboard') )

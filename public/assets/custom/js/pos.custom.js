@@ -433,6 +433,21 @@ $(document).on('change', '.quantity__value', function(){
 });
 
 /**
+ *  Amount Paid and Change
+**/
+$(document).on('click', '#amount__confirmBtn', function(){
+    let amount_paidValue = $(this).closest('#amount__paidInsert').find('.amount__paidValue').val();
+    alert(amount_paidValue)
+    // If not empty
+    if(amount_paidValue != ""){
+        let amount_paidCents = amount_paidValue.val() * 100;
+        alert(amount_paidCents)
+    } else{
+        return false;
+    }
+})
+
+/**
  *    Clear Prices
  **/
 $(document).on('click', '.reset__amount', function(e){

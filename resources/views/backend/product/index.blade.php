@@ -46,11 +46,14 @@
                         </tr>
                     </thead>
                         <tbody>
+                            @php
+                            ( $i = 1 )
+                            @endphp
                             @if( isset($products) )
                                 @foreach( $products as $product )
                                 <tr>
                                     <th scope="row">
-                                        <i class="fas fa-lg fa-fw me-2 fa-times"></i>
+                                        {{ $i++ }}
                                     </th>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->barcode }}</td>
@@ -71,7 +74,7 @@
                                         <a href="{{ route('admin.product.edit', $product->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
                                         </a>
-                                        <a href="#" class="icon__info">
+                                        <a href="{{ route('admin.product.view', $product->id) }}" class="icon__info">
                                             <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
                                         </a>
                                         <a href="{{ route('admin.product.delete', $product->id) }}" class="icon__danger">

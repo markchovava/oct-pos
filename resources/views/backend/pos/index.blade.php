@@ -241,6 +241,20 @@
 								</div>
 							</div>
 							<!-- END pos-sidebar-header -->
+                            <!-- BEGIN pos-sidebar-header -->
+							<div class="pos-sidebar-header" style="padding-top:0.3rem; padding-bottom:0.2rem;">
+                                <div class="title">Amount Paid</div>
+                            </div>
+                            <div id="amount__paidInsert" class="pos-sidebar-header" style="padding-top: 0.3rem;">
+                                <div class="input-group flex-nowrap">
+                                    <input type="text" name="amount_paid" class="form-control amount__paidValue" id=""
+                                        value="123.45" placeholder="00.00">
+                                    <span id="amount__confirmBtn" class="input-group-text btn amount__confirmBtn">
+                                        <i class="fas fa-lg fa-fw me-2 fa-check"></i>
+                                    </span>
+                                </div>
+							</div>
+							<!-- END pos-sidebar-header -->
 						
 							<!-- BEGIN pos-sidebar-nav -->
 							<div class="pos-sidebar-nav">
@@ -320,15 +334,23 @@
 										<input type="hidden" name="grandtotal" class="grandtotal__value">
 									</div>
 								</div>
+                                <hr />
+                                <div class="d-flex align-items-center mb-2">
+									<div>Change</div>
+									<div class="flex-1 text-end h6 mb-0">
+										$<span class="change__text"></span>
+										<input type="hidden" name="change" class="change__value">	
+									</div>
+								</div>
 								<div class="mt-3">
 									<div class="btn-group d-flex">
 										<a href="javascript:;" class="reset__amount btn btn-outline-default rounded-0 w-80px">
 											<i class="bi bi-bell fa-lg"></i><br />
 											<span class="small">Reset</span>
 										</a>
-										<a href="#" class="btn btn-outline-default rounded-0 w-80px">
+										<a href="#" id="calculator__modalBtn" class="btn btn-outline-default rounded-0 w-80px">
 											<i class="bi bi-receipt fa-fw fa-lg"></i><br />
-											<span class="small">Bill</span>
+											<span class="small">Calc.</span>
 										</a>
 										<button type="submit" class="btn btn-outline-theme rounded-0 w-150px">
 											<i class="bi bi-send-check fa-lg"></i><br />
@@ -365,112 +387,58 @@
 		<!-- END btn-scroll-top -->
 	</form>
 	<!-- END #app -->
-	
-	<!-- BEGIN #modalPosItem -->
-	<div class="modal modal-pos fade" id="modalPosItem">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content border-0">
-				<div class="card">
-					<div class="card-body p-0">
-						<a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
-						<div class="modal-pos-product">
-							<div class="modal-pos-product-img">
-								<div class="img" style="background-image: url(../assets/img/pos/product-1.jpg)"></div>
-							</div>
-							<div class="modal-pos-product-info">
-								<div class="h4 mb-2">Grill Chicken Chop</div>
-								<div class="text-white text-opacity-50 mb-2">
-									chicken, egg, mushroom, salad
-								</div>
-								<div class="h4 mb-3">$10.99</div>
-								<div class="d-flex mb-3">
-									<a href="#" class="btn btn-outline-theme"><i class="fa fa-minus"></i></a>
-									<input type="text" class="form-control w-50px fw-bold mx-2 bg-white bg-opacity-25 border-0 text-center" name="qty" value="1" />
-									<a href="#" class="btn btn-outline-theme"><i class="fa fa-plus"></i></a>
-								</div>
-								<hr class="mx-n4" />
-								<div class="mb-2">
-									<div class="fw-bold">Size:</div>
-									<div class="option-list">
-										<div class="option">
-											<input type="radio" id="size3" name="size" class="option-input" checked />
-											<label class="option-label" for="size3">
-												<span class="option-text">Small</span>
-												<span class="option-price">+0.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="radio" id="size1" name="size" class="option-input" />
-											<label class="option-label" for="size1">
-												<span class="option-text">Large</span>
-												<span class="option-price">+3.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="radio" id="size2" name="size" class="option-input" />
-											<label class="option-label" for="size2">
-												<span class="option-text">Medium</span>
-												<span class="option-price">+1.50</span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="mb-2">
-									<div class="fw-bold">Add On:</div>
-									<div class="option-list">
-										<div class="option">
-											<input type="checkbox" name="addon[sos]" value="true" class="option-input" id="addon1" />
-											<label class="option-label" for="addon1">
-												<span class="option-text">More BBQ sos</span>
-												<span class="option-price">+0.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ff]" value="true" class="option-input" id="addon2" />
-											<label class="option-label" for="addon2">
-												<span class="option-text">Extra french fries</span>
-												<span class="option-price">+1.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ms]" value="true" class="option-input" id="addon3" />
-											<label class="option-label" for="addon3">
-												<span class="option-text">Mushroom soup</span>
-												<span class="option-price">+3.50</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ms]" value="true" class="option-input" id="addon4" />
-											<label class="option-label" for="addon4">
-												<span class="option-text">Lemon Juice (set)</span>
-												<span class="option-price">+2.50</span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<hr class="mx-n4" />
-								<div class="row">
-									<div class="col-4">
-										<a href="#" class="btn btn-default h4 mb-0 d-block rounded-0 py-3" data-bs-dismiss="modal">Cancel</a>
-									</div>
-									<div class="col-8">
-										<a href="#" class="btn btn-success d-flex justify-content-center align-items-center rounded-0 py-3 h4 m-0">Add to cart <i class="bi bi-plus fa-2x ms-2 my-n3"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-arrow">
-						<div class="card-arrow-top-left"></div>
-						<div class="card-arrow-top-right"></div>
-						<div class="card-arrow-bottom-left"></div>
-						<div class="card-arrow-bottom-right"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- END #modalPosItem -->
+
+	<!-- Calculator Modal -->
+	<div id="calculator__modal" class="calculator__modalWrapper">
+        <section class="calculator__container container">
+            <div class="calculator container shadow">
+                <div class="modal__header">
+                    <a class="calculator__closeBtn text-danger">&times;</a>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="screen border border-secondary">
+                        <div class="screen__text text-dark"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-3"> <button class="btn btn-danger calc__operator" id="+">+</button> </div>
+                  <div class="col-md-3"> <button class="btn btn-info calc__operator" id="-">-</button> </div>
+                  <div class="col-md-3"> <button class="btn btn-success calc__operator" id="×">×</button> </div>
+                  <div class="col-md-3"> <button class="btn btn-warning calc__operator" id="/">&divide;</button> </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-md-9">
+                    <div class="row mb-3">
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="7">7</button></div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="8">8</button> </div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="9">9</button></div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="4">4</button></div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="5">5</button> </div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="6">6</button></div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="1">1</button></div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="2">2</button> </div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="3">3</button></div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id=".">.</button></div>
+                      <div class="col-4"> <button class="btn btn-outline-secondary calc__number" id="0">0</button> </div>
+                      <div class="col-4"> <button class="clear__btn btn btn-outline-secondary calc__operator" id="C">C</button></div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="col-12 equal__wrapper"> <button class="btn btn-primary equal__btn" id="=">=</button></div>
+                  </div>
+                </div>
+            </div>
+        </section>
+    </div>
+	<!-- end Calculator Modal -->
 	
     @include('backend._layouts.js')	
 

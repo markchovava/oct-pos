@@ -39,8 +39,20 @@ Route::get('/', function(){
         return redirect()->route('login');
     }
 });
+
+
+Route::get('/print', function(){
+    return view('backend.print.view');
+});
+
 /*  */
-Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+if( auth()->check() ){
+    return redirect()->route('admin.dashboard');
+}
+else{
+    Route::get('/login', [AdminAuthController::class, 'login'])->name('login');
+}
+
 Route::get('/register', [AdminAuthController::class, 'register'])->name('register');
 Route::post('/register', [AdminAuthController::class, 'register_process'])->name('register.process');
 Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
@@ -125,6 +137,7 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
      **/
     Route::middleware(['isEditor'])->prefix('product')->group(function() {
         Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
+        Route::get('/view/{id}', [ProductController::class, 'view'])->name('admin.product.view');
         Route::get('/add', [ProductController::class, 'add'])->name('admin.product.add');
         Route::post('/store', [ProductController::class, 'store'])->name('admin.product.store');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
