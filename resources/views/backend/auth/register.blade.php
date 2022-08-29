@@ -20,7 +20,11 @@
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Email Address <span class="text-danger">*</span></label>
-						<input type="email" name="email" class="form-control form-control-lg bg-white bg-opacity-5" placeholder="username@address.com" value="" />
+						<input type="email" name="email" class="form-control form-control-lg bg-white bg-opacity-5" 
+						placeholder="username@address.com" value="" />
+						@error('email')
+							<span class="text-danger">{{ $message }}</span>
+						@enderror
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Password <span class="text-danger">*</span></label>
@@ -42,6 +46,18 @@
 							<option value="Female">Female</option>
 							<option value="Male">Male</option>
 						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Company / Branch <span class="text-danger">*</span></label>
+						<select name="info_id" class="form-select" id="role" required="required">
+							<option value="">Select an option.</option>
+							@foreach($infos as $info)
+							<option value="{{ $info->id }}">{{ $info->name }}</option>
+							@endforeach
+						</select>
+						@error('info_id')
+							<span class="text-danger">{{ $message }}</span>
+						@enderror
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Date of Birth (MM/YY/DD) <span class="text-danger">*</span></label>

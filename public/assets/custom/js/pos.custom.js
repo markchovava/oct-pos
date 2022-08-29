@@ -426,10 +426,11 @@ $(document).on('change', '.quantity__value', function(){
     tax_value.val(tax_calculate);
      /*   Subtotal   */
      let subtotal = grandtotalNumber - tax_calculate; // Tax Calculation
-     let subtotal_calculate = subtotal / 100;
+     let subtotalNumber = Number(subtotal);
+     let subtotal_calculate = subtotalNumber / 100;
      let subtotal_decimal = subtotal_calculate.toFixed(2);
      subtotal_text.text(subtotal_decimal);
-     subtotal_value.val(subtotal_calculate);
+     subtotal_value.val(subtotalNumber);
 });
 
 /**

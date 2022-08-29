@@ -54,7 +54,11 @@
                                     <td>{{ $user->name}}</td>
                                     <td>{{ isset($user->role) ? $user->role->name : '' }}</td>
                                     <td>{{ $user->phone_number }}</td>
-                                    <td>{{ $user->code }}</td>
+                                    <td>
+                                        <span class="text-success">
+                                            {{ isset($user->code) ? $user->code : 'Encrypted'}}
+                                        </span>
+                                    </td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>
                                         @can('create', $user)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Info\BasicInfo;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
@@ -12,9 +13,11 @@ use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     public function view(){
-        $id = Auth::id();
-        $profile = User::where('id', $id)->first();
+        $auth_id = Auth::id();
+        $profile = User::with('role')->where('id', $auth_id)->first();
         $data['profile'] = $profile;
+        $info = BasicInfo::where('id', $profile->info_id)->first();
+        $data['info'] = $info;
         return view('backend.profile.view', $data);
     }
 
@@ -24,12 +27,15 @@ class ProfileController extends Controller
         $data['roles'] = $roles;
         $profile = User::find($id);
         $data['profile'] = $profile;
+        $infos = BasicInfo::orderBy('name', 'asc')->get();
+        $data['infos'] = $infos;
         return view('backend.profile.edit', $data);
     }
 
     public function update(Request $request){
         $id = Auth::id();
         $profile = User::find($id);
+        $profile->info_id = $request->info_id;
         $profile->first_name = $request->first_name;
         $profile->last_name = $request->last_name;
         $profile->name = $request->first_name . ' ' . $request->last_name;

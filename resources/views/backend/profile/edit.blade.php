@@ -179,6 +179,23 @@
                                                         </div>
                                                     </div>
                                                     @endif
+                                                    @if(isset($infos))
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group mb-3">
+                                                                <label class="form-label" for="role">Company / Branch:</label>
+                                                                <select name="info_id" class="form-select" id="role">
+                                                                    <option value="">Select an option.</option>
+                                                                    @foreach( $infos as $info )
+                                                                    <option value="{{ $info->id }}" {{ ($info->id == $profile->info_id) ? 'selected="selected"' : '' }}>
+                                                                        {{ $info->name }}
+                                                                    </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>

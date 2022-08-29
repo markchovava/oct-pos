@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Info\BasicInfo;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
@@ -22,11 +23,14 @@ class UserController extends Controller
     public function add(){
         $roles = Role::orderBy('name', 'asc')->get();
         $data['roles'] = $roles;
+        $infos = BasicInfo::orderBy('name', 'asc')->get();
+        $data['infos'] = $infos;
         return view('backend.user.add', $data);
     }
 
     public function store(Request $request){
         $user = new User();
+        $user->info_id = $request->info_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->name = $request->first_name . ' ' . $request->last_name;
@@ -60,18 +64,26 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index');
     }
+    
     public function edit($id){
         $roles = Role::orderBy('name', 'asc')->get();
         $data['roles'] = $roles;
         $user = User::find($id);
+        $infos = BasicInfo::orderBy('name', 'asc')->get();
+        $data['infos'] = $infos;
         $data['user'] = $user;
+        
         return view('backend.user.edit', $data);
     }
+
     public function view($id){
         $user = User::with('role')->find($id);
         $data['user'] = $user;
+        $info = BasicInfo::where('id', $user->info_id)->first();
+        $data['info'] = $info;
         return view('backend.user.view', $data);
     }
+
     public function search(Request $request){
         $name = $request->search;
         $results = User::where('name', 'LIKE', '%' . $name . '%')->get();
@@ -82,6 +94,7 @@ class UserController extends Controller
     
     public function update(Request $request, $id){
         $user = User::find($id);
+        $user->info_id = $request->info_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->name = $request->first_name . ' ' . $request->last_name;

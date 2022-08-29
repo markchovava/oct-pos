@@ -168,6 +168,11 @@
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
+								<a href="{{ route('admin.info.index') }}" class="menu-link">
+									<span class="menu-text">Company / Branch</span>
+								</a>
+							</div>
+							<div class="menu-item">
 								<a href="{{ route('admin.role.index') }}" class="menu-link">
 									<span class="menu-text">Roles</span>
 								</a>

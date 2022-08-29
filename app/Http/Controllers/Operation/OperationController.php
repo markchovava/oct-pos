@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Operation;
 
 use App\Http\Controllers\Controller;
+use App\Models\Info\BasicInfo;
 use App\Models\Operation\Operation;
 use App\Models\User;
 use App\Models\User\Role;
@@ -26,10 +27,13 @@ class OperationController extends Controller
         return view('backend.operation.index', $data);
     }
     public function add(){
-        return view('backend.operation.add');
+        $infos = BasicInfo::orderBy('name', 'asc')->get();
+        $data['infos'] = $infos;
+        return view('backend.operation.add', $data);
     }
     public function store(Request $request){
         $operator = new User();
+        $operator->info_id = $request->info_id;
         $operator->first_name = $request->first_name;
         $operator->last_name = $request->last_name;
         $operator->name = $request->first_name . ' ' . $request->last_name;
@@ -68,6 +72,8 @@ class OperationController extends Controller
         $operations = Operation::where('user_id', $id)->paginate(15);
         $data['operator'] = $operator;
         $data['operations'] = $operations;
+        $info = BasicInfo::where('id', $operator->info_id)->first();
+        $data['info'] = $info;
         return view('backend.operation.view', $data);
     }
     public function edit($id){
@@ -75,10 +81,13 @@ class OperationController extends Controller
         $data['roles'] = $roles;
         $operator = User::find($id);
         $data['operator'] = $operator;
+        $infos = BasicInfo::orderBy('name', 'asc')->get();
+        $data['infos'] = $infos;
         return view('backend.operation.edit', $data);
     }
     public function update(Request $request, $id){
         $operator = User::find($id);
+        $operator->info_id = $request->info_id;
         $operator->first_name = $request->first_name;
         $operator->last_name = $request->last_name;
         $operator->name = $request->first_name . ' ' . $request->last_name;

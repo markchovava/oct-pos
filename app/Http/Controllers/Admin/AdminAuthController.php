@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Info\BasicInfo;
 use App\Models\Operation\Operation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,17 +18,21 @@ class AdminAuthController extends Controller
     }
 
     public function register(){
-        return view('backend.auth.register');
+        $infos = BasicInfo::orderBy('name', 'asc')->paginate(15);
+        $data['infos'] = $infos;
+        return view('backend.auth.register', $data);
     }
 
     public function register_process(Request $request){
         $request->validate([
             'name' => 'required',
+            'info_id' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed'
         ]);
         $user = new User();
         $user->role_id = 4;
+        $user->info_id = $request->info_id;
         $user->name = $request->name;
         $name = explode(" ", $request->name);
         $user->first_name = isset($name[0]) ? $name[0] : '';

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Info\BasicInfo;
 use App\Models\Operation\Operation;
 use App\Models\User\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -19,6 +20,9 @@ class User extends Authenticatable
      **/
     public function role(){
         return $this->belongsTo(Role::class, 'role_id', 'level');
+    }
+    public function info(){
+        return $this->belongsTo(BasicInfo::class, 'info_id', 'level');
     }
     /**
      *  One to Many 

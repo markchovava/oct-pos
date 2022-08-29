@@ -92,6 +92,11 @@
                                                         <div class="col-md-8">{{ isset($profile->role->name) ? $profile->role->name : '' }}</div>
                                                     </div>
                                                     <hr class="mt-3 mb-3" />
+                                                    <div class="row">
+                                                        <div class="col-md-4">Company / Branch:</div>
+                                                        <div class="col-md-8">{{ isset($info->name) ? $info->name : 'Not Defined.' }}</div>
+                                                    </div>
+                                                    <hr class="mt-3 mb-3" />
                                                 </div>
                                                 <div class="card-arrow">
                                                     <div class="card-arrow-top-left"></div>

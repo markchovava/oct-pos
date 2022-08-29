@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Info\BasicInfoController;
 use App\Http\Controllers\Operation\OperationController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\OrderItem\OrderItemController;
+use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\POS\POSController;
 use App\Http\Controllers\Price\PriceController;
 use App\Http\Controllers\Product\ProductController;
@@ -80,6 +82,18 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::get('/delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
     });
+
+    Route::middleware(['isEditor'])->prefix('info')->group(function() {
+        Route::get('/', [BasicInfoController::class, 'index'])->name('admin.info.index');
+        Route::get('/add', [BasicInfoController::class, 'add'])->name('admin.info.add');
+        Route::post('/store', [BasicInfoController::class, 'store'])->name('admin.info.store');
+        Route::get('/view/{id}', [BasicInfoController::class, 'view'])->name('admin.info.view');
+        Route::get('/edit/{id}', [BasicInfoController::class, 'edit'])->name('admin.info.edit');
+        Route::post('/update/{id}', [BasicInfoController::class, 'update'])->name('admin.info.update');
+        Route::get('/search', [BasicInfoController::class, 'search'])->name('admin.info.search');
+        Route::get('/delete/{id}', [BasicInfoController::class, 'delete'])->name('admin.info.delete');
+    });
+
     
 
     /*  */
@@ -182,6 +196,11 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::post('/update', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::get('/password', [ProfileController::class, 'password'])->name('admin.profile.password');
         Route::post('/password/update', [ProfileController::class, 'password_update'])->name('admin.profile.password.update');
+    });
+
+    /* Profile */
+    Route::middleware(['isOperator'])->prefix('pdf')->group(function() {
+        Route::get('/reciept', [PDFController::class, 'reciept'])->name('admin.pdf.reciept');
     });
 
     /* Sales */

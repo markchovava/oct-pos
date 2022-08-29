@@ -79,7 +79,7 @@ class POSController extends Controller
                 $order->subtotal = $request->subtotal;
                 $order->tax = $request->tax;
                 $order->amount_paid = $request->amount_paid;
-                $order->change = $request->customer_change;
+                $order->customer_change = $request->customer_change;
                 $order->grandtotal = $request->grandtotal;
                 $order->currency = $request->currency;
                 $order->notes = $request->notes;
@@ -120,6 +120,7 @@ class POSController extends Controller
                 }			
                 
             });
+            return redirect()->route('admin.pdf.reciept');
         }
         return redirect()->route('admin.pos');
     }
