@@ -23,12 +23,16 @@ class PDFController extends Controller
         $user = User::where('id', $user_id)->first();
         $info = BasicInfo::where('id', $user->info_id)->first();
         /* Operation */
-        $operations = Operation::where('user_id', $user->id)->get();
-        $operation = $operations[count($operations) - 1]; 
-       
+        //$operations = Operation::where('user_id', $user->id)->get();
+        //$operation = $operations[count($operations) - 1]; 
+
+        $operation = Operation::where('user_id', $user->id)->orderBy('created_at', 'desc')->first();
+        //dd($operation);
         /* Order */
-        $orders = Order::where('operation_id', $operation->id)->get();
-        $order = $orders[count($orders) - 1];
+        // $orders = Order::where('operation_id', $operation->id)->get();
+        // $order = $orders[count($orders) - 1];
+
+        $order = Order::where('operation_id', $operation->id)->orderBy('created_at', 'desc')->first();
         //$order = DB::table('orders')->where('operation_id', $operation->id)->latest('created_at')->first();
         //dd($order->created_at);
         /* Order Item */
