@@ -34,15 +34,18 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
+                            <th style="width: 7%;" scope="col">#</th>
                             <th style="width: 30%;" scope="col">Name</th>
-                            <th style="width: 50%;" scope="col">Description</th>
+                            <th style="width: 43%;" scope="col">Description</th>
                             <th style="width: 20%;" scope="col">Action</th>
                         </tr>
                     </thead>
                         <tbody>
                             @if( isset($categories) )
+                                @php($i = 1)
                                 @foreach( $categories as $category )
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->description }}</td>      
                                     <td>
@@ -58,8 +61,10 @@
                             @endif
 
                             @if( isset($results) )
+                                @php($i = 1)
                                 @foreach($results as $result )
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $result->name }}</td>
                                     <td>{{ $result->description }}</td>      
                                     <td>
@@ -75,6 +80,15 @@
                             @endif
                         </tbody>
                     </table>
+                    @if( isset($categories) )
+                    <div class="my-2">
+                        {{ $categories->links() }}
+                    </div>
+                    @elseif( isset($results) )
+                    <div class="my-2">
+                        {{ $results->links() }}
+                    </div>
+                    @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

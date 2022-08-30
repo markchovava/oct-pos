@@ -132,6 +132,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @if( isset($operation) )
+                            <div class="my-2">
+                                {{ $operation->links() }}
+                            </div>
+                            @elseif( isset($result) )
+                            <div class="my-2">
+                                {{ $result->links() }}
+                            </div>
+                        @endif
                     @else
                         <div class="text-center h3 text-warning"> No Operations available yet.</div>
                     @endif

@@ -85,6 +85,12 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <div class="my-2">
+                            {{ $orders->links() }}
+                        </div>
+                        
+
                     @elseif( isset($results) )
                         <table class="table table-hover mb-0">
                             <thead>
@@ -133,6 +139,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="my-2">
+                            {{ $orders->links() }}
+                        </div>
                     @else
                         <div class="text-center h3 text-warning"> No Operations available yet.</div>
                     @endif

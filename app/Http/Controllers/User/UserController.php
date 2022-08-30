@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(){
         $id = Auth::id();
-        $users = User::where('id', '!=', $id)->orderBy('name', 'asc')->get();
+        $users = User::where('id', '!=', $id)->orderBy('name', 'asc')->paginate(10);
         $data['users'] = $users;
         $data['results'] = NULL;
         return view('backend.user.index', $data);

@@ -105,6 +105,7 @@
                         @endif
                     </tbody>
                 </table>
+                
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

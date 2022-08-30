@@ -12,7 +12,7 @@ class StockController extends Controller
     public function index(){
         $data['results'] = NULL;
         /* Get Product */
-        $products = Product::with('stock')->get();
+        $products = Product::with('stock')->paginate(10);
         $data['products'] = $products;
         return view('backend.stock.index', $data);
     }
@@ -20,7 +20,7 @@ class StockController extends Controller
     public function search(Request $request){
         $name = $request->search;
         $data['products'] = NULL;
-        $results = Product::with('stock')->where('name', 'LIKE', '%' . $name . '%')->get();
+        $results = Product::with('stock')->where('name', 'LIKE', '%' . $name . '%')->paginate(10);
         $data['results'] = $results;
         return view('backend.stock.index', $data);
     }

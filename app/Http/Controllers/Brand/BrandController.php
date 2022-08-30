@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BrandController extends Controller
 {
     public function index(){
-        $data['brands'] = Brand::orderBy('updated_at','desc')->get();
+        $data['brands'] = Brand::orderBy('updated_at','desc')->paginate(10);
         return view('backend.brand.index', $data);
     }
 

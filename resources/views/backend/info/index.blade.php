@@ -98,6 +98,15 @@
                         
                     </tbody>
                 </table>
+                @if( isset($info) )
+                    <div class="my-2">
+                        {{ $info->links() }}
+                    </div>
+                    @elseif( isset($result) )
+                    <div class="my-2">
+                        {{ $result->links() }}
+                    </div>
+                @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

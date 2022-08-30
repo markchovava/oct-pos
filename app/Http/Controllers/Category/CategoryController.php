@@ -9,7 +9,7 @@ use App\Models\Category\Category;
 class CategoryController extends Controller
 {
     public function index(){
-        $data['categories'] = Category::orderBy('created_at', 'desc')->get();
+        $data['categories'] = Category::orderBy('created_at', 'desc')->paginate(10);
         return view('backend.category.index', $data);
     }
 
@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
     public function search(Request $request){
         $search = $request->search;
-        $data['results'] = Category::where('name', 'LIKE', '%' . $search . '%')->get();
+        $data['results'] = Category::where('name', 'LIKE', '%' . $search . '%')->paginate(10);
         return view('backend.category.index', $data);
     }
 

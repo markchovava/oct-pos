@@ -16,3 +16,5 @@ $route = url()->current();
 <!-- ================== END page-css ================== -->
 @endif
 
+<link href="{{ asset('assets/vendors/toastr/toastr.min.css') }}" rel="stylesheet" />
+

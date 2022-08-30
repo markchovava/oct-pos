@@ -14,7 +14,7 @@ class SaleController extends Controller
             DB::raw('sum(quantity) as quantity'), 
             DB::raw('sum(product_total) as product_total'),
             )->groupBy(['product_name', 'currency'])
-            ->orderBy('product_name', 'asc')->get();
+            ->orderBy('product_name', 'asc')->paginate(10);
         $data['sales'] = $sales;
         
         $data['results'] = null;

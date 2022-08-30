@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class BasicInfoController extends Controller
 {
     public function index(){
-        $infos = BasicInfo::orderBy('name', 'asc')->paginate(15);
+        $infos = BasicInfo::orderBy('name', 'asc')->paginate(10);
         $data['infos'] = $infos;
         return view('backend.info.index', $data);
     }

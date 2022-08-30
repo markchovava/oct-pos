@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(){
-        $data['products'] = Product::orderBy('updated_at', 'desc')->get();
+        $data['products'] = Product::orderBy('updated_at', 'desc')->paginate(10);
         return view('backend.product.index', $data);
     }
 
@@ -220,8 +220,13 @@ class ProductController extends Controller
             
         });
 
+        $notification = [
+            'message' => 'Updated Successfully',
+            'alert-type' => 'success'
+        ];
+
         /* Redirect to Index */
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with($notification);
     }
 
     public function delete($id){

@@ -34,6 +34,7 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
+                            <th style="width: 7%;" scope="col">#</th>
                             <th style="width: 30%;" scope="col">Image</th>
                             <th style="width: 50%;" scope="col">Name</th>
                             <th style="width: 20%;" scope="col">Action</th>
@@ -41,8 +42,10 @@
                     </thead>
                         <tbody>
                             @if( isset($brands) )
+                            @php($i = 1)
                                 @foreach( $brands as $brand )
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td class="d-flex justify-content-center">
                                         <div class="img__icon-40">
                                             <img src="{{ (!empty($brand->image)) ? url('storage/images/brands/' . $brand->image) : url('storage/images/brands/no_image.jpg') }}" 
@@ -63,8 +66,10 @@
                             @endif
 
                             @if( isset($results) )
+                                @php($i = 1)
                                 @foreach($results as $result )
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td class="d-flex justify-content-center">
                                         <div class="img__icon-40">
                                             <img src="{{ (!empty($result->image)) ? url('storage/images/brands/' . $result->image) : url('storage/images/brands/no_image.jpg') }}" 
@@ -85,6 +90,15 @@
                             @endif
                         </tbody>
                     </table>
+                    @if( isset($brands) )
+                    <div class="my-2">
+                        {{ $brands->links() }}
+                    </div>
+                    @elseif( isset($results) )
+                    <div class="my-2">
+                        {{ $results->links() }}
+                    </div>
+                    @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

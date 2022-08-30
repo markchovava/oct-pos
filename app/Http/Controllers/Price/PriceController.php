@@ -11,7 +11,7 @@ class PriceController extends Controller
 {
     public function index(){
         $data['results'] = NULL;
-        $products = Product::with('price')->get();
+        $products = Product::with('price')->paginate(10);
         $data['products'] = $products;
         return view('backend.price.index', $data);
     }

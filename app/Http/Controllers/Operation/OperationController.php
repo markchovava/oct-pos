@@ -14,7 +14,7 @@ class OperationController extends Controller
 {
     public function index(){
         $operators = User::with(['role', 'operations'])->where('role_id', '>=', '3')
-                                        ->orderBy('updated_at', 'desc')->paginate(15);
+                                        ->orderBy('updated_at', 'desc')->paginate(10);
         $data['operators'] = $operators;    
         $data['results'] = NULL;
         return view('backend.operation.index', $data);
@@ -69,7 +69,7 @@ class OperationController extends Controller
     }
     public function view($id){
         $operator = User::with(['role'])->where('id', $id)->first();
-        $operations = Operation::where('user_id', $id)->paginate(15);
+        $operations = Operation::where('user_id', $id)->paginate(10);
         $data['operator'] = $operator;
         $data['operations'] = $operations;
         $info = BasicInfo::where('id', $operator->info_id)->first();

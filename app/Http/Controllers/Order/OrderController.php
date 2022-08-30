@@ -12,12 +12,12 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index(){
-        $data['orders'] = Order::with(['order_items'])->orderBy('updated_at', 'desc')->get();
+        $data['orders'] = Order::with(['order_items'])->orderBy('updated_at', 'desc')->paginate(10);
         return view('backend.order.index', $data);
     }
 
     public function view($id){
-        $orders = Order::where('operation_id', $id)->orderBy('created_at', 'desc')->paginate(15);
+        $orders = Order::where('operation_id', $id)->orderBy('created_at', 'desc')->paginate(10);
         $operation = Operation::where('id', $id)->first();
         $user = User::where('id', $operation->user_id)->first();
         $data['user'] = $user;
@@ -33,7 +33,7 @@ class OrderController extends Controller
         $operation = Operation::where('id', $order->operation_id)->first();
         $orders = Order::where('transaction_id', 'LIKE', '%' . $transaction_id . '%')
                                     ->where('operation_id', 'LIKE', '%' . $order->operation_id. '%')
-                                    ->orderBy('created_at', 'desc')->paginate(15);
+                                    ->orderBy('created_at', 'desc')->paginate(10);
         $user = User::where('id', $operation->user_id)->first();
         $data['user'] = $user;
         $data['results'] = $orders;

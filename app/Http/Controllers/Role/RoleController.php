@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     public function index(){
-        $data['roles'] = Role::orderBy('level', 'asc')->get();
+        $data['roles'] = Role::orderBy('level', 'asc')->paginate(10);
         return view('backend.role.index', $data);
     }
 

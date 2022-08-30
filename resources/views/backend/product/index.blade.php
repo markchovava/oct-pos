@@ -84,8 +84,52 @@
                                 </tr>
                                 @endforeach
                             @endif
+                            @if( isset($results) )
+                                @foreach( $results as $product )
+                                <tr>
+                                    <th scope="row">
+                                        {{ $i++ }}
+                                    </th>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->barcode }}</td>
+                                    <td>
+                                        @php
+                                            $usd = intval($product->price->usd) / 100;
+                                        @endphp
+                                        ${{ number_format($usd, 2, '.', '') }}
+                                    </td>
+                                    <td>
+                                        @php
+                                            $zwl = intval($product->price->zwl) / 100;
+                                        @endphp
+                                        ${{ number_format($zwl, 2, '.', '') }}
+                                    </td>
+                                    <td>{{ $product->created_at }} </td>
+                                    <td>
+                                        <a href="{{ route('admin.product.edit', $product->id) }}" class="icon__success">
+                                            <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
+                                        </a>
+                                        <a href="{{ route('admin.product.view', $product->id) }}" class="icon__info">
+                                            <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('admin.product.delete', $product->id) }}" class="icon__danger">
+                                            <i class="fas fa-lg fa-fw me-2 fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
+                    @if( isset($products) )
+                            <div class="my-2">
+                                {{ $products->links() }}
+                            </div>
+                            @elseif( isset($results) )
+                            <div class="my-2">
+                                {{ $result->links() }}
+                            </div>
+                        @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
