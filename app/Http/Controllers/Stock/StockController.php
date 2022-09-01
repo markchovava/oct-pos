@@ -36,6 +36,12 @@ class StockController extends Controller
         $stock = Stock::where('product_id', $id)->first();
         $stock->quantity = $request->quantity;
         $stock->save();
-        return redirect()->route('admin.stock.index');
+
+        $notification = [
+            'message' => 'Role Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('admin.stock.index')->with($notification);
     }
 }

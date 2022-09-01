@@ -92,13 +92,18 @@
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
-							<span class="menu-text">Pricing</span>
+							<span class="menu-text">Orders</span>
 							<span class="menu-caret"><b class="caret"></b></span>
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="{{ route('admin.price.index') }}" class="menu-link">
-									<span class="menu-text">Price List</span>
+								<a href="{{ route('admin.order.index') }}" class="menu-link">
+									<span class="menu-text">All Orders</span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="{{ route('admin.order.daily') }}" class="menu-link">
+									<span class="menu-text">Daily Orders</span>
 								</a>
 							</div>
 						</div>

@@ -118,9 +118,14 @@ class ProductController extends Controller
             $stock->quantity = $request->quantity;
             $stock->save();
         });
+
+        $notification = [
+            'message' => 'Added Successfully',
+            'alert-type' => 'success'
+        ];
         
         /* Redirect to Index */
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.product.index')->with($notification);
     }
 
     public function edit($id){

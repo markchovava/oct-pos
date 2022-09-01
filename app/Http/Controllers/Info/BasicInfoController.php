@@ -44,7 +44,11 @@ class BasicInfoController extends Controller
         }
         $info->save();
 
-        return redirect()->route('admin.info.index');
+        $notification = [
+            'message' => 'Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.info.index')->with($notification);
     }
 
     public function update(Request $request, $id){
@@ -72,8 +76,12 @@ class BasicInfoController extends Controller
             }              
         }
         $info->save();
-
-        return redirect()->route('admin.info.index');
+        
+        $notification = [
+            'message' => 'Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.info.index')->with($notification);
     }
 
     public function edit($id){
@@ -91,7 +99,11 @@ class BasicInfoController extends Controller
     public function delete($id){
         $info = BasicInfo::where('id', $id)->delete();
 
-        return redirect()->route('admin.info.index');
+        $notification = [
+            'message' => 'Deleted Successfully',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->route('admin.info.index')->with($notification);
     }
 
     public function search(Request $request){

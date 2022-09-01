@@ -28,6 +28,10 @@ class PriceController extends Controller
         $price->zwl = $request->zwl;
         $price->save();
 
-        return redirect()->route('admin.price.index');
+        $notification = [
+            'message' => 'Updated Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.price.index')->with($notification);
     }
 }

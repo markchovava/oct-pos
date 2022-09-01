@@ -30,6 +30,11 @@ class TaxController extends Controller
             $tax->percent = $request->percent;
             $tax->save();
         }
-        return redirect()->route('admin.tax.edit');
+
+        $notification = [
+            'message' => 'Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.tax.edit')->with($notification);
     }
 }

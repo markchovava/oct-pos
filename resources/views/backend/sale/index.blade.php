@@ -32,60 +32,68 @@
             <!-- BEGIN card -->
             <div class="card h-100">
                 <div class="card-body h-100 p-1">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th style="width: 30%;" scope="col">Name </th>
-                            <th style="width: 20%;" scope="col">Quantity </th>
-                            <th style="width: 15%;" scope="col">Currency </th>
-                            <th style="width: 15%;" scope="col">Total </th>
-                            <th style="width: 20%;" scope="col">Action</th>
-                        </tr>
-                    </thead>
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;" scope="col">Name </th>
+                                <th style="width: 20%;" scope="col">Quantity </th>
+                                <th style="width: 15%;" scope="col">Currency </th>
+                                <th style="width: 15%;" scope="col">Total </th>
+                                <th style="width: 20%;" scope="col">Action</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             @if( isset($sales) )
                                 @foreach( $sales as $sale )
-                                <tr>
-                                    <td> {{ $sale->product_name }} </td>
-                                    <td> {{ $sale->quantity }} </td>      
-                                    <td> {{ $sale->currency }} </td>      
-                                    <td> 
-                                       @php
-                                            $sale = (int)$sale->product_total / 100
-                                       @endphp
-                                        ${{ number_format((float)$sale,2,'.','') }}
-                                    </td>      
-                                    <td>
-                                        <a href="#" class="icon__info">
-                                            <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td> {{ $sale->product_name }} </td>
+                                        <td> {{ $sale->quantity }} </td>      
+                                        <td> {{ $sale->currency }} </td>      
+                                        <td> 
+                                        @php
+                                                $sale = (int)$sale->product_total / 100
+                                        @endphp
+                                            ${{ number_format((float)$sale,2,'.','') }}
+                                        </td>      
+                                        <td>
+                                            <a href="#" class="icon__info">
+                                                <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             @endif
-
                             @if( isset($results) )
                                 @foreach( $results as $sale )
-                                <tr>
-                                    <td> {{ $sale->product_name }} </td>
-                                    <td> {{ $sale->quantity }} </td>      
-                                    <td> {{ $sale->currency }} </td>      
-                                    <td> 
-                                       @php
-                                            $sale = (int)$sale->product_total / 100
-                                       @endphp
-                                        ${{ number_format((float)$sale,2,'.','') }}
-                                    </td>      
-                                    <td>
-                                        <a href="#" class="icon__info">
-                                            <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td> {{ $sale->product_name }} </td>
+                                        <td> {{ $sale->quantity }} </td>      
+                                        <td> {{ $sale->currency }} </td>      
+                                        <td> 
+                                        @php
+                                                $sale = (int)$sale->product_total / 100
+                                        @endphp
+                                            ${{ number_format((float)$sale,2,'.','') }}
+                                        </td>      
+                                        <td>
+                                            <a href="#" class="icon__info">
+                                                <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             @endif
                         </tbody>
                     </table>
+                    @if( isset($sales) )
+                        <div class="my-2">
+                            {{ $sales->links() }}
+                        </div>
+                        @elseif( isset($results) )
+                        <div class="my-2">
+                            {{ $result->links() }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>

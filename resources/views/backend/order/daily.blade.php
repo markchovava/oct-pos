@@ -9,18 +9,12 @@
         <li class="breadcrumb-item"><a href="{{ route('admin.operation.list') }}">OPERATIONS</a></li>
         <li class="breadcrumb-item active">ORDERS</li>
     </ul>
-    <h1 class="page-header">
-       All Orders
-</h1>
+   
     <div class="row mb-4">
-        <form method="get" action="{{ route('admin.order.searchview') }}" class="col-sm-5">
-            <div class="input-group flex-nowrap">
-                <input type="text" class="form-control" name="search" 
-                value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}" placeholder="Order Number">
-                <button type="submit" class="input-group-text btn btn-outline-secondary">
-                    <i class="fas fa-lg fa-fw me-2 fa-search"></i>
-                </button>
-            </div>
+        <form class="col-sm-5">
+        <h1 class="page-header">
+            Daily Orders
+        </h1>
         </form>
         <div class="col-sm-7 text-end">
             <a href="{{ route('admin.pos') }}">
@@ -37,49 +31,23 @@
                         <table class="table table-hover mb-0">
                             <thead>
                                 <tr>
-                                    <th style="width: 15%;"scope="col">Created At</th>
-                                    <th style="width: 15%;"scope="col">Order No.</th>
-                                    <th style="width: 5%;" scope="col">Currency</th>
-                                    <th style="width: 10%;" scope="col">Tax</th>
-                                    <th style="width: 10%;" scope="col">Discount</th>
-                                    <th style="width: 15%;" scope="col">Subtotal</th>
-                                    <th style="width: 15%;" scope="col">Total</th>
+                                    <th style="width: 10%;"scope="col">#</th>
+                                    <th style="width: 50%;"scope="col">Date</th>
+                                    <th style="width: 25%;" scope="col">No. Of Orders</th>
                                     <th style="width: 15%;" scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php( $i = 1 )
                                 @foreach($orders as $order)
                                 <tr>
-                                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('j M Y') }}</td>
-                                    <td>{{ $order->transaction_id }}</td>
-                                    <td>{{ $order->currency }}</td>
-                                    <td>
-                                        @php($tax = $order->tax / 100 )
-                                        ${{ number_format($tax, 2, '.', '') }}
-                                    </td>
-                                    <td>
-                                        @php($discount = $order->discount / 100 )
-                                        ${{ number_format($discount, 2, '.', '') }}
-                                    </td>
-                                     <td>
-                                        @php($subtotal = $order->subtotal / 100 )
-                                        ${{ number_format($subtotal, 2, '.', '') }}
-                                    </td>
-                                    <td>
-                                        @php($grandtotal = $order->grandtotal / 100 )
-                                        ${{ number_format($grandtotal, 2, '.', '') }}
-                                     </td>
-                                    <td>
-                                        @can('view-any', $order)
-                                        <a href="{{ route('admin.item.list', $order->id) }}" class="icon__info">
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($order->date)->format('j M Y') }}</td>
+                                    <td>{{ $order->daily_order }}</td>
+                                    <td> 
+                                        <a href="{{ route('admin.order.daily.view', $order->date) }}" class="icon__info">
                                             <i class="fas fa-lg fa-fw me-2 fa-eye"></i>
-                                        </a>
-                                        @endcan
-                                        @can('delete', $order)
-                                        <a href="{{ route('admin.order.delete', $order->id) }}" class="icon__danger">
-                                            <i class="fas fa-lg fa-fw me-2 fa-trash-alt"></i>
-                                        </a>
-                                        @endcan
+                                        </a>  
                                     </td>
                                 </tr>
                                 @endforeach
@@ -108,7 +76,7 @@
                             <tbody>
                                 @foreach($results as $order)
                                 <tr>
-                                    <td>{{ Carbon::parse($order->created_at)->format('j F Y') }}</td>
+                                    <td>{{ $order->created_at }}</td>
                                     <td>{{ $order->transaction_id }}</td>
                                     <td>{{ $order->currency }}</td>
                                     <td>

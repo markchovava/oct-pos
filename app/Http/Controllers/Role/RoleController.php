@@ -47,15 +47,15 @@ class RoleController extends Controller
             'message' => 'Role Updated Successfully!!...',
             'alert-type' => 'success'
         ];
-
         return redirect()->route('admin.role.index')->with($notification);
     }
 
     public function delete($id){
         $role = Role::where('id', $id)->delete();
+
         $notification = [
-            'message' => 'Role Updated Successfully!!...',
-            'alert-type' => 'success'
+            'message' => 'Deleted Successfully!!...',
+            'alert-type' => 'danger'
         ];
         return redirect()->route('admin.role.index')->with($notification);
     }

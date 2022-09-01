@@ -69,7 +69,7 @@
                                         @endphp
                                         ${{ number_format($zwl, 2, '.', '') }}
                                     </td>
-                                    <td>{{ $product->created_at }} </td>
+                                    <td>{{ $product->created_at->diffForHumans() }} </td>
                                     <td>
                                         <a href="{{ route('admin.product.edit', $product->id) }}" class="icon__success">
                                             <i class="fas fa-lg fa-fw me-2 fa-pencil"></i>
@@ -121,7 +121,7 @@
                             @endif
                         </tbody>
                     </table>
-                    @if( isset($products) )
+                        @if( isset($products) )
                             <div class="my-2">
                                 {{ $products->links() }}
                             </div>

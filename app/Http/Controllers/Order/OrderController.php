@@ -8,6 +8,7 @@ use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -45,6 +46,27 @@ class OrderController extends Controller
         $order = Order::where('id', $id)->first();
         $items = OrderItem::where('order_id', $order->id)->delete();
         $orders = Order::where('id', $id)->delete();
-        return redirect()->back();
+
+        $notification = [
+            'message' => 'Deleted Successfully',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->back()->with($notification);
     }
+
+    public function daily(){
+        $orders = DB::table('orders')
+                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as daily_order'))
+                ->groupBy('date')
+                ->paginate(10);
+        $data['orders'] = $orders;
+        return view('backend.order.daily', $data);
+    }
+
+    public function daily_view($date){
+        $orders = Order::with(['order_items'])->where('created_at', 'LIKE', '%' . $date . '%')->orderBy('updated_at', 'desc')->paginate(10);
+        $data['orders'] = $orders;
+        return view('backend.order.index', $data);
+    }
+
 }

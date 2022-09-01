@@ -67,7 +67,12 @@ class ProfileController extends Controller
         }
         $profile->save();
 
-        return redirect()->route('admin.profile.view');
+        $notification = [
+            'message' => 'Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('admin.profile.view')->with($notification);
     }
 
     public function password(){
@@ -84,6 +89,11 @@ class ProfileController extends Controller
         $password = $request->password;
         $profile->password = Hash::make($password);
         $profile->save();
-        return redirect()->route('admin.profile.view');
+
+        $notification = [
+            'message' => 'Password Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.profile.view')->with($notification);
     }
 }

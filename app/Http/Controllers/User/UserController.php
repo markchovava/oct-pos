@@ -126,11 +126,20 @@ class UserController extends Controller
         }
         $user->save();
 
-        return redirect()->route('admin.user.index');
+        $notification = [
+            'message' => 'Updated Successfully!!...',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.user.index')->with($notification);
     }
  
     public function delete($id){
         $user = User::where('id', $id)->delete();
-        return redirect()->route('admin.user.index');
+
+        $notification = [
+            'message' => 'Deleted Successfully!!...',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->route('admin.user.index')->with($notification);
     }
 }

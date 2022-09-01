@@ -120,7 +120,12 @@ class POSController extends Controller
                 }			
                 
             });
-            return redirect()->route('admin.pdf.reciept');
+
+            $notification = [
+                'message' => 'Added Successfully',
+                'alert-type' => 'success'
+            ];
+            return redirect()->route('admin.pdf.reciept')->with($notification);
         }
         return redirect()->route('admin.pos');
     }

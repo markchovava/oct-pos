@@ -136,7 +136,8 @@ class PDFController extends Controller
 
         $pdf->Cell(30, 5, $grandtotal, 0, 1, 'R'); // end of line
 
-        $pdf->Output();
+        $pdf->Output( $order->transaction_id . '.pdf', 'I');
+        //$pdf->Output();
 
         exit;
     }

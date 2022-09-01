@@ -21,6 +21,7 @@ use App\Http\Controllers\Stock\StockController;
 use App\Http\Controllers\Tax\TaxController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,16 @@ Route::get('/logout', [AdminAuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
 
+    Route::get('/test', function(){
+        $order = DB::table('orders')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as daily_orders'))
+            ->groupBy('date')
+            ->get();
+        
+        dd($order);
+        //return $order;
+    });
+
     /* Brands Management */
     Route::middleware(['isEditor'])->prefix('brand')->group(function() {
         Route::get('/', [BrandController::class, 'index'])->name('admin.brand.index');
@@ -94,9 +105,7 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [BasicInfoController::class, 'delete'])->name('admin.info.delete');
     });
 
-    
-
-    /*  */
+    /* Dashboard */
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     /* Point of Sale */
     Route::middleware(['isOperator'])->prefix('pos')->group(function() {
@@ -132,6 +141,9 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('admin.order.delete');
         Route::get('/searchview', [OrderController::class, 'searchview'])->name('admin.order.searchview');
         Route::get('/search', [OrderController::class, 'search'])->name('admin.order.search');
+        Route::get('/daily', [OrderController::class, 'daily'])->name('admin.order.daily');
+        Route::get('/daily/view/{date}', [OrderController::class, 'daily_view'])->name('admin.order.daily.view');
+        Route::get('/daily/view/search', [OrderController::class, 'daily_search'])->name('admin.order.daily.search');
         Route::prefix('item')->group(function(){
             Route::get('/list/{id}', [OrderItemController::class, 'list'])->name('admin.item.list');
             Route::get('/searchlist', [OrderItemController::class, 'searchlist'])->name('admin.item.searchlist');

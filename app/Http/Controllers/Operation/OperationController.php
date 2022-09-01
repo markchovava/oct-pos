@@ -65,8 +65,13 @@ class OperationController extends Controller
         }
         $operator->save();
 
-        return redirect()->route('admin.operation.index');
+        $notification = [
+            'message' => 'Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.operation.index')->with($notification);
     }
+
     public function view($id){
         $operator = User::with(['role'])->where('id', $id)->first();
         $operations = Operation::where('user_id', $id)->paginate(10);
@@ -119,22 +124,32 @@ class OperationController extends Controller
         }
         $operator->save();
 
-        return redirect()->route('admin.operation.index');
+        $notification = [
+            'message' => 'Added Successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('admin.operation.index')->with($notification);
     }
+
     public function delete($id){
         $operator = User::where('id', $id)->delete();
         return redirect()->route('admin.operation.index');
     }
 
     public function list(){
-        $operations = Operation::with('user')->orderBy('updated_at', 'desc')->paginate(15);
+        $operations = Operation::with('user')->orderBy('updated_at', 'desc')->paginate(10);
         $data['operations'] = $operations;
         $data['results'] = NULL;
         return view('backend.operation.list', $data);
     }
     public function deletelist($id){
         $operator =  Operation::with('user')->where('id', $id)->delete();
-        return redirect()->route('admin.operation.list');
+        
+        $notification = [
+            'message' => 'Deleted Successfully',
+            'alert-type' => 'danger'
+        ];
+        return redirect()->route('admin.operation.list')->with($notification);
     }
 
     public function searchlist(Request $request){
