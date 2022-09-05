@@ -4,17 +4,30 @@ namespace App\Http\Controllers\Brand;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand\Brand;
+use App\Models\Operation\Operation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
 {
     public function index(){
+        // Brand list
         $data['brands'] = Brand::orderBy('updated_at','desc')->paginate(10);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.brand.index', $data);
     }
 
     public function add(){
-        return view('backend.brand.add');
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
+        return view('backend.brand.add', $data);
     }
 
     public function store(Request $request){
@@ -47,6 +60,10 @@ class BrandController extends Controller
 
     public function edit($id){
         $data['brand'] = Brand::where('id', $id)->first();
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
         return view('backend.brand.edit', $data);
     }
 

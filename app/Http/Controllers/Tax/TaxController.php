@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Tax;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation\Operation;
 use App\Models\Tax\Tax;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaxController extends Controller
 {
@@ -15,6 +17,10 @@ class TaxController extends Controller
         }else{
             $data['tax'] = NULL;
         }
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
         return view('backend.tax.edit', $data);
     }
 

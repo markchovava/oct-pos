@@ -51,6 +51,7 @@ $route = url()->current();
 <script src="{{ asset('assets/custom/js/product.custom.js') }}"></script>
 <script src="{{ asset('assets/custom/js/pos.custom.js') }}"></script>
 <script src="{{ asset('assets/custom/js/calculator.custom.js') }}"></script>
+<script src="{{ asset('assets/custom/js/operation.custom.js') }}"></script>
 
 
 <script>

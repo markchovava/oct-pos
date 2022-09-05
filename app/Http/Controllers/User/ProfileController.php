@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Info\BasicInfo;
+use App\Models\Operation\Operation;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
@@ -18,6 +19,11 @@ class ProfileController extends Controller
         $data['profile'] = $profile;
         $info = BasicInfo::where('id', $profile->info_id)->first();
         $data['info'] = $info;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.profile.view', $data);
     }
 
@@ -29,6 +35,11 @@ class ProfileController extends Controller
         $data['profile'] = $profile;
         $infos = BasicInfo::orderBy('name', 'asc')->get();
         $data['infos'] = $infos;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.profile.edit', $data);
     }
 
@@ -76,7 +87,12 @@ class ProfileController extends Controller
     }
 
     public function password(){
-        return view('backend.auth.password');
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
+        return view('backend.auth.password', $data);
     }
 
     public function password_update(Request $request){

@@ -8,12 +8,18 @@ use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
     public function index(){
         $data['orders'] = Order::with(['order_items'])->orderBy('updated_at', 'desc')->paginate(10);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.order.index', $data);
     }
 
@@ -24,6 +30,11 @@ class OrderController extends Controller
         $data['user'] = $user;
         $data['orders'] = $orders;
         $data['results'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.order.view', $data);
     }
 
@@ -39,6 +50,11 @@ class OrderController extends Controller
         $data['user'] = $user;
         $data['results'] = $orders;
         $data['orders'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.order.view', $data);
     }
 
@@ -60,12 +76,22 @@ class OrderController extends Controller
                 ->groupBy('date')
                 ->paginate(10);
         $data['orders'] = $orders;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.order.daily', $data);
     }
 
     public function daily_view($date){
         $orders = Order::with(['order_items'])->where('created_at', 'LIKE', '%' . $date . '%')->orderBy('updated_at', 'desc')->paginate(10);
         $data['orders'] = $orders;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.order.index', $data);
     }
 

@@ -8,6 +8,7 @@ use App\Models\Operation\Operation;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class OperationController extends Controller
@@ -17,6 +18,11 @@ class OperationController extends Controller
                                         ->orderBy('updated_at', 'desc')->paginate(10);
         $data['operators'] = $operators;    
         $data['results'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.index', $data);
     }
     public function search(Request $request){
@@ -24,13 +30,25 @@ class OperationController extends Controller
         $results = User::with(['role', 'operations'])->where('role_id', '>=', '3')
             ->where('name', 'LIKE', '%' . $name . '%')->orderBy('updated_at', 'desc')->paginate(15);
         $data['results'] = $results;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.operation.index', $data);
     }
+
     public function add(){
         $infos = BasicInfo::orderBy('name', 'asc')->get();
         $data['infos'] = $infos;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.add', $data);
     }
+
     public function store(Request $request){
         $operator = new User();
         $operator->info_id = $request->info_id;
@@ -79,8 +97,15 @@ class OperationController extends Controller
         $data['operations'] = $operations;
         $info = BasicInfo::where('id', $operator->info_id)->first();
         $data['info'] = $info;
+
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.view', $data);
     }
+
     public function edit($id){
         $roles = Role::orderBy('name', 'asc')->get();
         $data['roles'] = $roles;
@@ -88,8 +113,14 @@ class OperationController extends Controller
         $data['operator'] = $operator;
         $infos = BasicInfo::orderBy('name', 'asc')->get();
         $data['infos'] = $infos;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.edit', $data);
     }
+
     public function update(Request $request, $id){
         $operator = User::find($id);
         $operator->info_id = $request->info_id;
@@ -140,8 +171,14 @@ class OperationController extends Controller
         $operations = Operation::with('user')->orderBy('updated_at', 'desc')->paginate(10);
         $data['operations'] = $operations;
         $data['results'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.list', $data);
     }
+
     public function deletelist($id){
         $operator =  Operation::with('user')->where('id', $id)->delete();
         
@@ -159,6 +196,11 @@ class OperationController extends Controller
         $operations = Operation::where('user_id', $user->id)->get();
         $data['results'] = $operations;
         $data['operations'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.operation.list', $data);
     }
 

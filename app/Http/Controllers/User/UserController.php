@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Info\BasicInfo;
+use App\Models\Operation\Operation;
 use App\Models\User;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class UserController extends Controller
         $users = User::where('id', '!=', $id)->orderBy('name', 'asc')->paginate(10);
         $data['users'] = $users;
         $data['results'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.user.index', $data);
     }
 
@@ -25,6 +31,10 @@ class UserController extends Controller
         $data['roles'] = $roles;
         $infos = BasicInfo::orderBy('name', 'asc')->get();
         $data['infos'] = $infos;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
         return view('backend.user.add', $data);
     }
 
@@ -72,6 +82,10 @@ class UserController extends Controller
         $infos = BasicInfo::orderBy('name', 'asc')->get();
         $data['infos'] = $infos;
         $data['user'] = $user;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
         
         return view('backend.user.edit', $data);
     }
@@ -81,6 +95,11 @@ class UserController extends Controller
         $data['user'] = $user;
         $info = BasicInfo::where('id', $user->info_id)->first();
         $data['info'] = $info;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.user.view', $data);
     }
 
@@ -89,6 +108,11 @@ class UserController extends Controller
         $results = User::where('name', 'LIKE', '%' . $name . '%')->get();
         $data['results'] = $results;
         $data['users'] = NULL;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.user.index', $data);
     }
     

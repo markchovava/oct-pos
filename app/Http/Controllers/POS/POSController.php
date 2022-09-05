@@ -19,6 +19,11 @@ class POSController extends Controller
     public function index(){
         $tax = Tax::first();
         $data['tax'] = $tax;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.pos.index', $data);
    }
 
@@ -125,7 +130,7 @@ class POSController extends Controller
                 'message' => 'Added Successfully',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('admin.pdf.reciept')->with($notification);
+            return redirect()->route('admin.print')->with($notification);
         }
         return redirect()->route('admin.pos');
     }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\OrderItem;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation\Operation;
 use App\Models\Order\Order;
 use App\Models\Order\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderItemController extends Controller
 {
@@ -15,6 +17,11 @@ class OrderItemController extends Controller
         $item = OrderItem::where('order_id', $id)->first();
         $order = Order::where('id', $item->order_id)->first();
         $data['order'] = $order;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.orderitem.list', $data);
     }
 
@@ -24,6 +31,11 @@ class OrderItemController extends Controller
         $order = Order::where('id', $item->order_id)->first();
         $items = OrderItem::where('product_name', 'LIKE', '%' . $name . '%')->where('order_id', $order->id)->paginate(15);
         $data['results'] = $items;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.orderitem.list', $data);
     }
 }

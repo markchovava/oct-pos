@@ -14,6 +14,7 @@ use App\Http\Controllers\OrderItem\OrderItemController;
 use App\Http\Controllers\PDF\PDFController;
 use App\Http\Controllers\POS\POSController;
 use App\Http\Controllers\Price\PriceController;
+use App\Http\Controllers\Print\PrintController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\Sale\SaleController;
@@ -43,10 +44,12 @@ Route::get('/', function(){
     }
 });
 
-
-Route::get('/print', function(){
-    return view('backend.print.view');
+Route::get('/admin', function(){ 
+    return redirect()->route('admin.dashboard');
 });
+
+
+Route::get('/print', [PrintController::class, 'print']);
 
 /*  */
 if( auth()->check() ){
@@ -71,6 +74,9 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         dd($order);
         //return $order;
     });
+
+    
+    Route::get('/print', [PrintController::class, 'print'])->name('admin.print');
 
     /* Brands Management */
     Route::middleware(['isEditor'])->prefix('brand')->group(function() {

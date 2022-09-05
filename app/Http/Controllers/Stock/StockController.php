@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Stock;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation\Operation;
 use App\Models\Product\Product;
 use App\Models\Stock\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
@@ -14,6 +16,11 @@ class StockController extends Controller
         /* Get Product */
         $products = Product::with('stock')->paginate(10);
         $data['products'] = $products;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.stock.index', $data);
     }
 
@@ -22,13 +29,22 @@ class StockController extends Controller
         $data['products'] = NULL;
         $results = Product::with('stock')->where('name', 'LIKE', '%' . $name . '%')->paginate(10);
         $data['results'] = $results;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.stock.index', $data);
     }
 
     public function edit($id){
         $product = Product::with('stock')->where('id', $id)->first();
         $data['product'] = $product;
-        //dd($data['product']->name);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.stock.edit', $data);
     }
 

@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Role;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operation\Operation;
 use App\Models\User\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
     public function index(){
         $data['roles'] = Role::orderBy('level', 'asc')->paginate(10);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.role.index', $data);
     }
 
     public function add(){
-        return view('backend.role.add');
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        return view('backend.role.add', $data);
     }
 
     public function store(Request $request){
@@ -33,6 +44,11 @@ class RoleController extends Controller
     }
     public function edit($id){
         $data['role'] = Role::where('id', $id)->first();
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.role.edit', $data);
     }
 
@@ -63,6 +79,12 @@ class RoleController extends Controller
     public function search(Request $request){
         $search = $request->search;
         $data['results'] = Role::where('name', 'LIKE', '%' . $search . '%')->get();
+
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.role.index', $data);
     }
 }

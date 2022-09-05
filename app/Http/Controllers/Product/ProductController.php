@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Brand\Brand;
 use App\Models\Category\Category;
+use App\Models\Operation\Operation;
 use App\Models\Product\Price;
 use App\Models\Product\Product;
 use App\Models\Product\ProductBrand;
@@ -13,12 +14,18 @@ use App\Models\Product\ProductTag;
 use App\Models\Specification\Specification;
 use App\Models\Stock\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index(){
         $data['products'] = Product::orderBy('updated_at', 'desc')->paginate(10);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+        
         return view('backend.product.index', $data);
     }
 
@@ -30,6 +37,11 @@ class ProductController extends Controller
         $data['product'] = $product;
         $data['stock'] = $stock;
         $data['price'] = $price;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.product.view', $data);
     }
 
@@ -38,6 +50,11 @@ class ProductController extends Controller
         $data['categories'] = $categories;
         $brands = Brand::orderBy('name', 'asc')->get();
         $data['brands'] = $brands;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.product.add', $data);
     }
 
@@ -139,6 +156,11 @@ class ProductController extends Controller
         $data['db_categories'] = ProductCategory::where('product_id', $id)->get();
         $data['product'] = Product::with(['stock', 'tags', 'brands', 'categories', 'specifications'])
                                 ->find($id);
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.product.edit', $data);
     }
 

@@ -4,18 +4,30 @@ namespace App\Http\Controllers\Info;
 
 use App\Http\Controllers\Controller;
 use App\Models\Info\BasicInfo;
+use App\Models\Operation\Operation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BasicInfoController extends Controller
 {
     public function index(){
         $infos = BasicInfo::orderBy('name', 'asc')->paginate(10);
         $data['infos'] = $infos;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.info.index', $data);
     }
 
     public function add(){
-        return view('backend.info.add');
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
+        return view('backend.info.add', $data);
     }
 
 
@@ -87,12 +99,22 @@ class BasicInfoController extends Controller
     public function edit($id){
         $info = BasicInfo::find($id);
         $data['info'] = $info;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.info.edit', $data);
     }
 
     public function view($id){
         $info = BasicInfo::find($id);
         $data['info'] = $info;
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.info.view', $data);
     }
 
@@ -109,6 +131,11 @@ class BasicInfoController extends Controller
     public function search(Request $request){
         $name = $request->search; 
         $data['results'] = BasicInfo::where('name', 'LIKE', '%' . $name . '%')->get();
+        // User Status
+        $auth_id = Auth::user()->id;
+        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $data['operation_status'] = $operation_status;
+
         return view('backend.info.index', $data);
     }
 }
