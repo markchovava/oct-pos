@@ -22,6 +22,7 @@ use App\Http\Controllers\Stock\StockController;
 use App\Http\Controllers\Tax\TaxController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserStatusController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -76,7 +77,13 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
     });
 
     
-    Route::get('/print', [PrintController::class, 'print'])->name('admin.print');
+    Route::get('/print', [PrintController::class, 'print_html'])->name('admin.print');
+    Route::get('/print/text', [PrintController::class, 'print_text'])->name('admin.print');
+    /* PDF */
+    Route::middleware(['isOperator'])->prefix('pdf')->group(function() {
+        Route::get('/', [PDFController::class, 'reciept'])->name('admin.pdf.reciept');
+    });
+    Route::get('/user/status', [UserStatusController::class, 'status'])->name('admin.user.status');
 
     /* Brands Management */
     Route::middleware(['isEditor'])->prefix('brand')->group(function() {
@@ -214,11 +221,6 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::post('/update', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::get('/password', [ProfileController::class, 'password'])->name('admin.profile.password');
         Route::post('/password/update', [ProfileController::class, 'password_update'])->name('admin.profile.password.update');
-    });
-
-    /* Profile */
-    Route::middleware(['isOperator'])->prefix('pdf')->group(function() {
-        Route::get('/reciept', [PDFController::class, 'reciept'])->name('admin.pdf.reciept');
     });
 
     /* Sales */

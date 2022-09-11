@@ -21,7 +21,7 @@ class POSController extends Controller
         $data['tax'] = $tax;
         // User Status
         $auth_id = Auth::user()->id;
-        $operation_status = Operation::where('user_id', $auth_id)->first();
+        $operation_status = Operation::where('user_id', $auth_id)->orderBy('created_at', 'desc')->first();
         $data['operation_status'] = $operation_status;
         
         return view('backend.pos.index', $data);
@@ -48,7 +48,7 @@ class POSController extends Controller
                 /**
                  *   Operation
                  */
-                $operation = Operation::where('user_id', $user_id)->where('status', 1)->first();
+                $operation = Operation::where('user_id', $user_id)->where('status', 1)->orderBy('created_at','desc')->first();
                 if( isset($operation) ){
                     if($request->currency == 'ZWL'){
                         $operation->zwl_total += (int)$request->grandtotal;
@@ -127,10 +127,10 @@ class POSController extends Controller
             });
 
             $notification = [
-                'message' => 'Added Successfully',
+                'message' => 'Order Processed Successfully',
                 'alert-type' => 'success'
             ];
-            return redirect()->route('admin.print')->with($notification);
+            return redirect()->route('admin.pos')->with($notification);
         }
         return redirect()->route('admin.pos');
     }

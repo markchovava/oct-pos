@@ -494,3 +494,23 @@ $(document).on('keypress', 'input[type="text"], .quantity__value, input[type="hi
     }
 });
 
+/** 
+*   Disable Submit if Status is not Active
+**/
+  
+/* Attached to an event listener */
+$(document).on('click', '#submit__btn', function(e){
+    let the_user_status = $('input[name="user_status"]').val();
+    if( the_user_status == 1 ){
+        $('#submit__btn').attr('disabled', false);
+    }
+    else if( the_user_status == 0 ){
+        $('#submit__btn').attr('disabled', true);
+        alert('You are required to be active to submit this Order.');
+        return false;
+    }
+});
+
+
+
+

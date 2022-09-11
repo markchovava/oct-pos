@@ -92,9 +92,15 @@
 			</div>
 		</div>
 		<div class="menu-item dropdown dropdown-mobile-full">
-			<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link user__active">
+			<a href="{{ route('admin.user.status') }}" class="menu-link user__active">
 				<div class="menu-icon"><i class="bi bi-bell nav-icon"></i></div>
-				<input type="hidden" class="user__status" name="user_status" value="{{ $operation_status->status }}">
+				<input type="hidden" class="user__status" name="user_status" 
+				value="{{ isset($operation_status->status) ? $operation_status->status : '' }}">
+				@if(isset($operation_status->status))
+					@if( intval($operation_status->status) == 1 )
+						<div class="menu-badge bg-theme"></div>
+					@endif
+				@endif
 			</a>
 		</div>
 		<div class="menu-item dropdown dropdown-mobile-full">
