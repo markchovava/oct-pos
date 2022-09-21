@@ -34,18 +34,33 @@ class PrintController extends Controller
         /* Tax */
         $tax_percent = ( isset($order->tax) ) ? ($order->tax / $order->grandtotal) * 100 : '';
                 $write = 'RECEIPT <br>';
-                $write .= '********************* <br>';
-                $write .=  $info->name . '<br>';
-                $write .= $info->address. '<br>';;
-                $write .= 'Vat No.: ' . $info->vat_number . '<br>';
-                $write .= 'Staff: ' . $user->name . '<br>';
-                $write .= 'Date: ' .$order->created_at. '<br>';
-                $write .= 'POS: Till Online' . '<br>';
-                $write .= 'Staff: ' . $user->name. '<br>';
-                $write .= 'Currency: ' . $order->currency . '<br>';
-                $write .= 'Receipt No.: <b>' . $order->transaction_id . '</b>';
-                $write .= '<br>*********************<br>';
-                $write .= 'Desc         U.Pr.       Qty.        Amnt. <br>';  
+                $write .= '*********************' . PHP_EOL;
+                $write .=  $info->name;
+                $write .= PHP_EOL; // Line break in txt file
+                $write .= $info->address;
+                $write .= PHP_EOL;
+                $write .= 'Vat No.: ' . $info->vat_number; 
+                $write .= PHP_EOL;
+                $write .= 'Staff: ' . $user->name;
+                $write .= PHP_EOL;
+                $write .= 'Date: ' .$order->created_at;
+                $write .= PHP_EOL;
+                $write .= 'POS: Till Online';
+                $write .= PHP_EOL;
+                $write .= 'Staff: ' . $user->name;
+                $write .= PHP_EOL;
+                $write .= 'Currency: ' . $order->currency;
+                $write .= PHP_EOL;
+                $write .= 'Receipt No.: ' . $order->transaction_id; 
+                $write .= PHP_EOL;
+                $write .= PHP_EOL;
+                $write .= '*********************';
+                $write .= PHP_EOL;
+                $write .= str_pad('Desc ', 4, ' ', STR_PAD_RIGHT);
+                $write .= str_pad('U.Pr ', 4, ' ', STR_PAD_RIGHT);
+                $write .= str_pad('Qty ', 4, ' ', STR_PAD_RIGHT);
+                $write .= 'Amnt';
+                $write .= PHP_EOL;
              // Product List Item
             foreach($items as $item){          
                 $write .= $item->product_name;
@@ -57,35 +72,40 @@ class PrintController extends Controller
                 elseif( $order->currency == 'ZWL' ){
                     $unit_price = number_format($zwl_unit_price, 2, '.', '');
                 }
-                    $write .= '     $' . $unit_price;
-                    $write .= '     ' .$item->quantity;
+                    $write .= str_pad('$' . $unit_price, 5, ' ', STR_PAD_LEFT);
+                    $write .= str_pad($item->quantity, 5, ' ', STR_PAD_LEFT);
                 
                     $item_total = (int)$item->product_total / 100;
                     $product_total = number_format($item_total, 2, '.','');
-                    $write .= '     $' . $product_total . '<br>';
+                    $write .= str_pad('$' . $product_total, 5, ' ', STR_PAD_LEFT);
+                    $write .= PHP_EOL;
                 
             }
           
             // Subtotal
-            $write .= '                     Subtotal';
+            $write .= str_pad('Subtotal: ', 20, ' ', STR_PAD_LEFT);
                 $subtotal_calculate = $order->subtotal / 100;
                 $subtotal = number_format($subtotal_calculate, 2, '.', '');
-                $write .= '  $' . $subtotal . '<br>';
+            $write .= '$' . $subtotal;
+            $write .= PHP_EOL;
             // Tax
-            $write .= '                     Tax (' . $tax_percent . '%)';
+            $write .= str_pad('Tax (' . $tax_percent . '%)', 30, ' ', STR_PAD_LEFT);
                 $tax_calculate = $order->tax / 100;
                 $tax = number_format($tax_calculate, 2, '.', '');
-                $write .= '<br>     $' . $tax;
+            $write .= PHP_EOL;
+            $write .= str_pad('$' . $tax, 20, ' ', STR_PAD_LEFT);
             // Grand Total
-            $write .= '<br>                     Grandtotal';
+            $write .= PHP_EOL;
+            $write .= str_pad('Grandtotal: ', 20, ' ', STR_PAD_LEFT);
                 $grandtotal_calculate = $order->grandtotal / 100;
                 $grandtotal = number_format($grandtotal_calculate, 2, '.', '');
-                $write .= '$' . $grandtotal;
+            $write .= '$ ' . $grandtotal;
+            $write .= PHP_EOL;
+            $write .= '********************* . ';
+            $write .= PHP_EOL;
 
-            $write .= '<br>*********************<br>';
-
-            $write .= '<p>Thank you for shopping with us.</p>';
-        
+            $write .= 'Thank you for shopping with us.';
+            $write .= PHP_EOL;
 
         $file = './assets/txt/receipt.txt';
         file_put_contents($file, $write);
