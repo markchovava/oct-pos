@@ -98,13 +98,13 @@
                         
                     </tbody>
                 </table>
-                @if( isset($info) )
+                @if( isset($infos) )
                     <div class="my-2">
-                        {{ $info->links() }}
+                        {{ $infos->links() }}
                     </div>
-                    @elseif( isset($result) )
+                    @elseif( isset($results) )
                     <div class="my-2">
-                        {{ $result->links() }}
+                        {{ $results->links() }}
                     </div>
                 @endif
                 </div>

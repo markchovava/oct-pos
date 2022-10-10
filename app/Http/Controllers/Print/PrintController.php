@@ -162,7 +162,7 @@ class PrintController extends Controller
                         $write .= '<br>';
                         $write .= $info->address;
                         $write .= '<br>';
-                        $write .= 'Vat No.: ' . $info->vat_number;
+                        $write .= 'Phone.: ' . $info->phone;
                         $write .= '<br>';
                         $write .= 'Staff: <b>' . $user->name. '</b>';
                         $write .= '<br>';
@@ -171,9 +171,7 @@ class PrintController extends Controller
                     $write .= '<td style="width:300px;">';
                         $write .= 'Date: ' .$order->created_at;
                         $write .= '<br>';
-                        $write .= 'POS: Till Online';
-                        $write .= '<br>';
-                        $write .= 'Staff: ' . $user->name;
+                        $write .= 'POS: Online';
                         $write .= '<br>';
                         $write .= 'Currency: ' . $order->currency;
                         $write .= '<br>';
@@ -282,13 +280,18 @@ class PrintController extends Controller
                     $write .= '</tbody>';
                 $write .= '</table>';
 
-                return $write . '<script> window.print(); </script>';
+                return $write . 
+                    '<script> window.print(); 
+                        window.onafterprint = (event) => {
+                        window.close();
+                        };
+                    </script>';
             } else {
-                return '<h1 style="color:red;">No receipt Generated.</h1>';
+                return '<h1 style="color:red;">No Receipt generated yet.</h1>';
             }
         }
         else {
-            return '<h1 style="color:red;">No receipt Generated.</h1>';
+            return '<h1 style="color:red;">No Order submitted yet.</h1>';
         }
         
        
