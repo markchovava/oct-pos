@@ -509,7 +509,7 @@ $(document).on('click', '#submit__btn', function(e){
         alert('You are required to be active to submit this Order.');
         return false;
     }
-});
+}); 
 
 
 

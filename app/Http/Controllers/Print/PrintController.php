@@ -33,8 +33,10 @@ class PrintController extends Controller
         $items = OrderItem::where('order_id', $order->id)->get();
         /* Tax */
         $tax_percent = ( isset($order->tax) ) ? ($order->tax / $order->grandtotal) * 100 : '';
-                $write = 'RECEIPT <br>';
-                $write .= '*********************' . PHP_EOL;
+                $write = 'RECEIPT';
+                $write .= PHP_EOL; // Line break in txt file
+                $write .= '*********************';
+                $write .= PHP_EOL; // Line break in txt file
                 $write .=  $info->name;
                 $write .= PHP_EOL; // Line break in txt file
                 $write .= $info->address;
@@ -132,151 +134,163 @@ class PrintController extends Controller
         //dd($operation->id);
         $order = Order::where('operation_id', $operation->id)->orderBy('created_at', 'desc')->first();
         /* Order Item */
-        
-        $items = OrderItem::where('order_id', $order->id)->get();
-        /* Tax */
-        $tax_percent = ( isset($order->tax) ) ? ($order->tax / $order->grandtotal) * 100 : '';
+        if( isset($order) ){
+            $items = OrderItem::where('order_id', $order->id)->get();
+            if( isset($items) ){
+                /* Tax */
+                $tax_percent = ( isset($order->tax) ) ? ($order->tax / $order->grandtotal) * 100 : '';
 
-        $write = '<style>*{font-size: 12px;}</style>';
-    
-        $write .= '<table style="width:300px;">';
-            $write .= '<tbody>';
-            $write .= '<tr>';
-            $write .= '<th>';
-                $write .= '<h3> RECEIPT </h3>';
-            $write .= '</th>';
-            $write .= '</tr>';
-            $write .= '</tbody>';
-        $write .= '</table>';
-        $write .= '<table style="width:300px;">';
-            $write .= '<tbody>';
-            $write .= '<tr>';
-            $write .= '<td style="width:300px;">';
-                $write .= '<b>' . $info->name . '</b>';
-                $write .= '<br>';
-                $write .= $info->address;
-                $write .= '<br>';
-                $write .= 'Vat No.: ' . $info->vat_number;
-                $write .= '<br>';
-                $write .= 'Staff: <b>' . $user->name. '</b>';
-                $write .= '<br>';
-                $write .= '&nbsp;';
-            $write .= '</td>';
-            $write .= '<td style="width:300px;">';
-                $write .= 'Date: ' .$order->created_at;
-                $write .= '<br>';
-                $write .= 'POS: Till Online';
-                $write .= '<br>';
-                $write .= 'Staff: ' . $user->name;
-                $write .= '<br>';
-                $write .= 'Currency: ' . $order->currency;
-                $write .= '<br>';
-                $write .= 'Receipt No.: <b>' . $order->transaction_id . '</b>';
-            $write .= '</td>';
-            $write .= '</tr>';
-            $write .= '</tbody>';
-        $write .= '</table>';
-        $write .= '<table style="width:300px;">';
-            // Product Title List
-            $write .= '<tr>';
-            $write .= '<th style="width:40%; text-align:left;">';
-                $write .= 'Desc';
-            $write .= '</th>';
-            $write .= '<th style="width:20%; text-align:left;">';
-                $write .= 'U.Pr.';
-            $write .= '</th>';
-            $write .= '<th style="width:20%; text-align:left;">';
-                $write .= 'Qty.';
-            $write .= '</th>';
-            $write .= '<th style="width:20%; text-align:left;">';
-                $write .= 'Amnt.';
-            $write .= '</th>';
-            $write .= '</tr>';
-             // Product List Item
-            foreach($items as $item){
-                $write .= '<tr>';
-                $write .= '<td style="width:40%;">';
-                    $write .= $item->product_name;
-                $write .= '</td>';
-                $usd_unit_price = $item->usd_unit_price / 100;
-                $zwl_unit_price = $item->zwl_unit_price / 100;
-                if( $order->currency == 'USD' ){
-                    $unit_price = number_format($usd_unit_price, 2, '.', '');
-                }
-                elseif( $order->currency == 'ZWL' ){
-                    $unit_price = number_format($zwl_unit_price, 2, '.', '');
-                }
-                $write .= '<td style="width:20%">';
-                    $write .= '$' . $unit_price;
-                $write .= '</td>';
-                $write .= '<td style="width:20%">';
-                    $write .= $item->quantity;
-                $write .= '</td>';
-                $write .= '<td style="width:20%">';
-                    $item_total = (int)$item->product_total / 100;
-                    $product_total = number_format($item_total, 2, '.','');
-                    $write .= '$' . $product_total;
-                $write .= '</td>';
-                $write .= '</tr>';
+                $write = '<style media="print">
+                    *{font-size: 12px; }
+                    body{padding:10px; margin:0;}
+                    </style>';
+            
+                $write .= '<table style="width:300px;">';
+                    $write .= '<tbody>';
+                    $write .= '<tr>';
+                    $write .= '<th>';
+                        $write .= '<h3> RECEIPT </h3>';
+                    $write .= '</th>';
+                    $write .= '</tr>';
+                    $write .= '</tbody>';
+                $write .= '</table>';
+                $write .= '<table style="width:300px;">';
+                    $write .= '<tbody>';
+                    $write .= '<tr>';
+                    $write .= '<td style="width:300px;">';
+                        $write .= '<b>' . $info->name . '</b>';
+                        $write .= '<br>';
+                        $write .= $info->address;
+                        $write .= '<br>';
+                        $write .= 'Vat No.: ' . $info->vat_number;
+                        $write .= '<br>';
+                        $write .= 'Staff: <b>' . $user->name. '</b>';
+                        $write .= '<br>';
+                        $write .= '&nbsp;';
+                    $write .= '</td>';
+                    $write .= '<td style="width:300px;">';
+                        $write .= 'Date: ' .$order->created_at;
+                        $write .= '<br>';
+                        $write .= 'POS: Till Online';
+                        $write .= '<br>';
+                        $write .= 'Staff: ' . $user->name;
+                        $write .= '<br>';
+                        $write .= 'Currency: ' . $order->currency;
+                        $write .= '<br>';
+                        $write .= 'Receipt No.: <b>' . $order->transaction_id . '</b>';
+                    $write .= '</td>';
+                    $write .= '</tr>';
+                    $write .= '</tbody>';
+                $write .= '</table>';
+                $write .= '<table style="width:300px;">';
+                    // Product Title List
+                    $write .= '<tr>';
+                    $write .= '<th style="width:40%; text-align:left;">';
+                        $write .= 'Desc';
+                    $write .= '</th>';
+                    $write .= '<th style="width:20%; text-align:left;">';
+                        $write .= 'U.Pr.';
+                    $write .= '</th>';
+                    $write .= '<th style="width:20%; text-align:left;">';
+                        $write .= 'Qty.';
+                    $write .= '</th>';
+                    $write .= '<th style="width:20%; text-align:left;">';
+                        $write .= 'Amnt.';
+                    $write .= '</th>';
+                    $write .= '</tr>';
+                    // Product List Item
+                    foreach($items as $item){
+                        $write .= '<tr>';
+                        $write .= '<td style="width:40%;">';
+                            $write .= $item->product_name;
+                        $write .= '</td>';
+                        $usd_unit_price = $item->usd_unit_price / 100;
+                        $zwl_unit_price = $item->zwl_unit_price / 100;
+                        if( $order->currency == 'USD' ){
+                            $unit_price = number_format($usd_unit_price, 2, '.', '');
+                        }
+                        elseif( $order->currency == 'ZWL' ){
+                            $unit_price = number_format($zwl_unit_price, 2, '.', '');
+                        }
+                        $write .= '<td style="width:20%">';
+                            $write .= '$' . $unit_price;
+                        $write .= '</td>';
+                        $write .= '<td style="width:20%">';
+                            $write .= $item->quantity;
+                        $write .= '</td>';
+                        $write .= '<td style="width:20%">';
+                            $item_total = (int)$item->product_total / 100;
+                            $product_total = number_format($item_total, 2, '.','');
+                            $write .= '$' . $product_total;
+                        $write .= '</td>';
+                        $write .= '</tr>';
+                    }
+                    $write .= '</tbody>';
+                $write .= '</table>';
+
+                $write .= '<table style="width:300px;">';
+                    $write .= '<tbody>';
+                    // Subtotal
+                    $write .= '<tr>';
+                    $write .= '<td style="width:60%;">';
+                    $write .= '</td>';
+                    $write .= '<th style="width:20%;">';
+                    $write .= 'Subtotal';
+                    $write .= '</th>';
+                    $write .= '<td style="width:20%;">';
+                        $subtotal_calculate = $order->subtotal / 100;
+                        $subtotal = number_format($subtotal_calculate, 2, '.', '');
+                        $write .= '$' . $subtotal;
+                    $write .= '</td>';
+                    $write .= '</tr>';
+                    // Tax
+                    $write .= '<tr>';
+                    $write .= '<td style="width:60%;">';
+                    $write .= '</td>';
+                    $write .= '<th style="width:20%;">';
+                    $write .= 'Tax (' . $tax_percent . '%)';
+                    $write .= '</th>';
+                    $write .= '<td style="width:20%;">';
+                        $tax_calculate = $order->tax / 100;
+                        $tax = number_format($tax_calculate, 2, '.', '');
+                        $write .= '$' . $tax;
+                    $write .= '</td>';
+                    $write .= '</tr>';
+                    // Grand Total
+                    $write .= '<tr>';
+                    $write .= '<td style="width:60%;">';
+                    $write .= '</td>';
+                    $write .= '<th style="width:20%;">';
+                    $write .= 'Grandtotal';
+                    $write .= '</th>';
+                    $write .= '<td style="width:20%;">';
+                        $grandtotal_calculate = $order->grandtotal / 100;
+                        $grandtotal = number_format($grandtotal_calculate, 2, '.', '');
+                        $write .= '$' . $grandtotal;
+                    $write .= '</td>';
+                    $write .= '</tr>';
+                    $write .= '</tbody>';
+                $write .= '</table>';
+
+                $write .= '<table style="width:300px;">';
+                    $write .= '<tbody>';
+                    $write .= '<tr>';
+                    $write .= '<th>';
+                        $write .= '<p>Thank you for shopping with us.</p>';
+                    $write .= '</th>';
+                    $write .= '</tr>';
+                    $write .= '</tbody>';
+                $write .= '</table>';
+
+                return $write . '<script> window.print(); </script>';
+            } else {
+                return '<h1 style="color:red;">No receipt Generated.</h1>';
             }
-            $write .= '</tbody>';
-        $write .= '</table>';
-
-        $write .= '<table style="width:300px;">';
-            $write .= '<tbody>';
-            // Subtotal
-            $write .= '<tr>';
-            $write .= '<td style="width:60%;">';
-            $write .= '</td>';
-            $write .= '<th style="width:20%;">';
-            $write .= 'Subtotal';
-            $write .= '</th>';
-            $write .= '<td style="width:20%;">';
-                $subtotal_calculate = $order->subtotal / 100;
-                $subtotal = number_format($subtotal_calculate, 2, '.', '');
-                $write .= '$' . $subtotal;
-            $write .= '</td>';
-            $write .= '</tr>';
-            // Tax
-            $write .= '<tr>';
-            $write .= '<td style="width:60%;">';
-            $write .= '</td>';
-            $write .= '<th style="width:20%;">';
-            $write .= 'Tax (' . $tax_percent . '%)';
-            $write .= '</th>';
-            $write .= '<td style="width:20%;">';
-                $tax_calculate = $order->tax / 100;
-                $tax = number_format($tax_calculate, 2, '.', '');
-                $write .= '$' . $tax;
-            $write .= '</td>';
-            $write .= '</tr>';
-            // Grand Total
-            $write .= '<tr>';
-            $write .= '<td style="width:60%;">';
-            $write .= '</td>';
-            $write .= '<th style="width:20%;">';
-            $write .= 'Grandtotal';
-            $write .= '</th>';
-            $write .= '<td style="width:20%;">';
-                $grandtotal_calculate = $order->grandtotal / 100;
-                $grandtotal = number_format($grandtotal_calculate, 2, '.', '');
-                $write .= '$' . $grandtotal;
-            $write .= '</td>';
-            $write .= '</tr>';
-            $write .= '</tbody>';
-        $write .= '</table>';
-
-        $write .= '<table style="width:300px;">';
-            $write .= '<tbody>';
-            $write .= '<tr>';
-            $write .= '<th>';
-                $write .= '<p>Thank you for shopping with us.</p>';
-            $write .= '</th>';
-            $write .= '</tr>';
-            $write .= '</tbody>';
-    $write .= '</table>';
-
-        return $write . '<script> window.print(); </script>';
+        }
+        else {
+            return '<h1 style="color:red;">No receipt Generated.</h1>';
+        }
+        
        
     }
 

@@ -1,1 +1,22 @@
-RECEIPT <br>********************* <br>Make it<br>Mabelrign<br>Vat No.: 1234<br>Staff: Mark Chovava<br>Date: 2022-09-14 12:47:32<br>POS: Till Online<br>Staff: Mark Chovava<br>Currency: USD<br>Receipt No.: <b>20220914124794</b><br>*********************<br>Desc         U.Pr.       Qty.        Amnt. <br>Vegies     $200.00     3     $600.00<br>                     Subtotal  $510.00<br>                     Tax (15%)<br>     $90.00<br>                     Grandtotal$600.00<br>*********************<br><p>Thank you for shopping with us.</p>
+RECEIPT
+*********************
+Make it
+Mabelrign
+Vat No.: 1234
+Staff: Mark Chovava
+Date: 2022-10-10 07:37:23
+POS: Till Online
+Staff: Mark Chovava
+Currency: USD
+Receipt No.: 2022101007374
+
+*********************
+Desc U.Pr Qty Amnt
+Apple$23.00    2$46.00
+Test$21.00    2$42.00
+          Subtotal: $74.80
+                     Tax (15%)
+              $13.20
+        Grandtotal: $ 88.00
+********************* . 
+Thank you for shopping with us.

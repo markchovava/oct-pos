@@ -77,8 +77,8 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
     });
 
     
-    Route::get('/print', [PrintController::class, 'print_html'])->name('admin.print');
-    Route::get('/print/text', [PrintController::class, 'print_text'])->name('admin.print');
+    Route::get('/print/html', [PrintController::class, 'print_html'])->name('admin.print.html');
+    Route::get('/print/text', [PrintController::class, 'print_text'])->name('admin.print.text');
     /* PDF */
     Route::middleware(['isOperator'])->prefix('pdf')->group(function() {
         Route::get('/', [PDFController::class, 'reciept'])->name('admin.pdf.reciept');

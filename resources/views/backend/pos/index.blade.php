@@ -351,12 +351,16 @@
 										<a href="#" id="calculator__modalBtn" class="btn btn-outline-default rounded-0 w-80px">
 											<i class="bi bi-receipt fa-fw fa-lg"></i><br />
 											<span class="small">Calc.</span>
+										</a>   
+                                        <a href="{{ route('admin.print.html') }}" target="_blank" class="btn btn-outline-default rounded-0 w-80px">
+											<i class="bi bi-receipt fa-fw fa-lg"></i><br />
+											<span class="small">Print</span>
 										</a>               
                                         
                                         <button type="submit" id="submit__btn"
                                             class="btn btn-outline-theme rounded-0 w-150px">
                                             <i class="bi bi-send-check fa-lg"></i><br />
-                                            <span class="small">Submit Order</span>
+                                            <span class="small">Submit</span>
                                         </button>       
 									</div>
 								</div>
