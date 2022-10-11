@@ -87,6 +87,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- Order Items -->
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
@@ -110,6 +111,7 @@
 					</div>	
 					@endif
 					@if( Auth::user()->role_id <= 2 )
+					<!-- Users -->
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
@@ -131,6 +133,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- Sales -->
 					<div class="menu-item has-sub">
 						<a href="#" class="menu-link">
 							<span class="menu-icon">
@@ -142,7 +145,12 @@
 						<div class="menu-submenu">
 							<div class="menu-item">
 								<a href="{{ route('admin.sale.index') }}" class="menu-link">
-									<span class="menu-text">Sales Report</span>
+									<span class="menu-text">All Sales </span>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="{{ route('admin.sale.daily') }}" class="menu-link">
+									<span class="menu-text">Daily Sales</span>
 								</a>
 							</div>
 						</div>

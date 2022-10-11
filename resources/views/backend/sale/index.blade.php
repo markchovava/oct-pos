@@ -91,7 +91,7 @@
                         </div>
                         @elseif( isset($results) )
                         <div class="my-2">
-                            {{ $result->links() }}
+                            {{ $results->links() }}
                         </div>
                     @endif
                 </div>

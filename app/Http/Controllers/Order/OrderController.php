@@ -72,9 +72,12 @@ class OrderController extends Controller
 
     public function daily(){
         $orders = DB::table('orders')
-                ->select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as daily_order'))
-                ->groupBy('date')
-                ->paginate(10);
+                    ->select(
+                        DB::raw('DATE(created_at) as date'), 
+                        DB::raw('count(*) as daily_order')
+                    )
+                    ->groupBy('date')
+                    ->paginate(10);
         $data['orders'] = $orders;
         // User Status
         $auth_id = Auth::user()->id;

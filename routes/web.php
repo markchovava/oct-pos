@@ -229,6 +229,8 @@ Route::middleware(['auth', 'isOperator'])->prefix('admin')->group(function(){
         Route::get('/add', [SaleController::class, 'add'])->name('admin.sale.add');
         Route::get('/view', [SaleController::class, 'view'])->name('admin.sale.view');
         Route::get('/search', [SaleController::class, 'search'])->name('admin.sale.search');
+        Route::get('/daily', [SaleController::class, 'daily'])->name('admin.sale.daily');
+        Route::get('/daily/list/{date}', [SaleController::class, 'daily_list'])->name('admin.sale.daily.list');
     });
     /** 
      *  Stock 
