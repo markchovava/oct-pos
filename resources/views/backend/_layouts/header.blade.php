@@ -44,51 +44,30 @@
 			</a>
 			<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
 				<div class="row row-grid gx-0">
+					
 					<div class="col-4">
-						<a href="email_inbox.html" class="dropdown-item text-decoration-none p-3 bg-none">
-							<div class="position-relative">
-								<i class="bi bi-circle-fill position-absolute text-theme top-0 mt-n2 me-n2 fs-6px d-block text-center w-100"></i>
-								<i class="bi bi-envelope h2 opacity-5 d-block my-1"></i>
-							</div>
-							<div class="fw-500 fs-10px text-white">INBOX</div>
-						</a>
-					</div>
-					<div class="col-4">
-						<a href="pos_customer_order.html" target="_blank" class="dropdown-item text-decoration-none p-3 bg-none">
+						<a href="{{ route('admin.pos') }}" target="_blank" class="dropdown-item text-decoration-none p-3 bg-none">
 							<div><i class="bi bi-hdd-network h2 opacity-5 d-block my-1"></i></div>
 							<div class="fw-500 fs-10px text-white">POS SYSTEM</div>
 						</a>
 					</div>
 					<div class="col-4">
-						<a href="calendar.html" class="dropdown-item text-decoration-none p-3 bg-none">
-							<div><i class="bi bi-calendar4 h2 opacity-5 d-block my-1"></i></div>
-							<div class="fw-500 fs-10px text-white">CALENDAR</div>
-						</a>
-					</div>
-				</div>
-				<div class="row row-grid gx-0">
-					<div class="col-4">
-						<a href="helper.html" class="dropdown-item text-decoration-none p-3 bg-none">
-							<div><i class="bi bi-terminal h2 opacity-5 d-block my-1"></i></div>
-							<div class="fw-500 fs-10px text-white">HELPER</div>
-						</a>
-					</div>
-					<div class="col-4">
-						<a href="settings.html" class="dropdown-item text-decoration-none p-3 bg-none">
+						<a href="{{ route('admin.profile.view') }}" class="dropdown-item text-decoration-none p-3 bg-none">
 							<div class="position-relative">
 								<i class="bi bi-circle-fill position-absolute text-theme top-0 mt-n2 me-n2 fs-6px d-block text-center w-100"></i>
 								<i class="bi bi-sliders h2 opacity-5 d-block my-1"></i>
 							</div>
-							<div class="fw-500 fs-10px text-white">SETTINGS</div>
+							<div class="fw-500 fs-10px text-white">Profile</div>
 						</a>
 					</div>
 					<div class="col-4">
-						<a href="widgets.html" class="dropdown-item text-decoration-none p-3 bg-none">
-							<div><i class="bi bi-collection-play h2 opacity-5 d-block my-1"></i></div>
-							<div class="fw-500 fs-10px text-white">WIDGETS</div>
+						<a href="{{ route('admin.info.index') }}" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div><i class="bi bi-terminal h2 opacity-5 d-block my-1"></i></div>
+							<div class="fw-500 fs-10px text-white">HELPER</div>
 						</a>
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="menu-item dropdown dropdown-mobile-full">

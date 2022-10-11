@@ -22,7 +22,7 @@
 					</div>
 					@if( Auth::user()->role_id <= 3 )
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -72,7 +72,7 @@
 						</div>
 					</div>
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -89,7 +89,7 @@
 					</div>
 					<!-- Order Items -->
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -135,7 +135,7 @@
 					</div>
 					<!-- Sales -->
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -156,7 +156,7 @@
 						</div>
 					</div>
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="fas fa-gift"></i>
 							</span>
@@ -172,7 +172,7 @@
 						</div>
 					</div>					
 					<div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link">
 							<span class="menu-icon">
 								<i class="bi bi-gear"></i>
 							</span>
@@ -204,7 +204,7 @@
 				</div>
 				<!-- END menu -->
 				<div class="p-3 px-4 mt-auto">
-					<a href="#" class="btn d-block btn-outline-theme">
+					<a href="javascript:;" class="btn d-block btn-outline-theme">
 						<i class="fa fa-code-branch me-2 ms-n2 opacity-5"></i> Help & Support
 					</a>
 				</div>
