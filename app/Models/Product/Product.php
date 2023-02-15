@@ -52,8 +52,8 @@ class Product extends Model
     }
       /* Many to Many for Product and Users */
     public function product_users(){
-    return $this->belongsToMany(Sticker::class, 'product_users', 'product_id', 'user_id')
-        ->withTimestamps();
+        return $this->belongsToMany(Sticker::class, 'product_users', 'product_id', 'user_id')
+            ->withTimestamps();
     }
 
     /* Many to Many */

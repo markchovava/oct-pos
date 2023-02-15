@@ -295,7 +295,10 @@ $(document).on('click', '.product__results li', function(){
     let quantity_value = clone_row.find('.quantity__value');
     quantity_value.attr('type', 'number');
     quantity_value.attr('name', 'product_quantity[]');
+    quantity_value.val(1); // Add 1
     //let product_quantity = quantity_value.val();
+    /* Initial total */
+    
     /* */
     if ( product_id != null ){
         /* Insert Product Name */
@@ -313,8 +316,8 @@ $(document).on('click', '.product__results li', function(){
             price_text.text(product_usdDecimal);
             price_value.val(product_usdNumber);
             /* Product ToTAL */
-            product_totalText.text(0.00);
-            product_totalValue.val(0);
+            product_totalText.text(product_usdDecimal);
+            product_totalValue.val(product_usdNumber);
             /**
              *  Subtotal
              */
@@ -334,8 +337,8 @@ $(document).on('click', '.product__results li', function(){
             price_text.text(product_zwlDecimal);
             price_value.val(product_zwlNumber);
             /* Product ToTAL */
-            product_totalText.text(0.00);
-            product_totalValue.val(0);
+            product_totalText.text(product_zwlDecimal);
+            product_totalValue.val(product_zwlNumber);
             /**
              *  Subtotal
              */

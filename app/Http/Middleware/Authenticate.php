@@ -19,7 +19,8 @@ class Authenticate extends Middleware
         }
 
         if (!auth()->check()) {
-            return route('login');
+            //return route('login');
+            return route('admin.login');
         }
     }
 }

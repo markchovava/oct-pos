@@ -363,7 +363,7 @@
                                             <span class="small">Submit</span>
                                         </button>       
 									</div>
-								</div>
+								</div> 
 							</div>
 							<!-- END pos-sidebar-footer -->
 						</div>

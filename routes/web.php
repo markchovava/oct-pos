@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Brand\BrandController;
 use App\Http\Controllers\Category\CategoryController;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Info\BasicInfoController;
@@ -23,7 +24,7 @@ use App\Http\Controllers\Tax\TaxController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserStatusController;
-use Illuminate\Support\Facades\DB;
+
 
 /*
 |--------------------------------------------------------------------------
